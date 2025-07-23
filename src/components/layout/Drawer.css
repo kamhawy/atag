@@ -1,0 +1,265 @@
+/* Drawer Styles */
+.app-drawer {
+  width: 280px !important;
+  background: var(--surface-card);
+  border-right: 1px solid var(--surface-border);
+  box-shadow: 2px 0 16px 0 rgba(0,0,0,0.08); /* subtle elevation */
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.app-drawer .p-sidebar-content {
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Drawer Header */
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--surface-border);
+  background: var(--surface-section);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--primary-color);
+  border-radius: 12px;
+  color: white;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Enhance close button for accessibility */
+.close-btn {
+  color: var(--text-color-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 0.25rem;
+  transition: color 0.2s, background 0.2s;
+  outline: none;
+}
+.close-btn:hover, .close-btn:focus {
+  color: var(--primary-color);
+  background: var(--surface-hover);
+  box-shadow: 0 0 0 2px var(--primary-color-alpha-20, #90caf955);
+}
+
+/* Drawer Navigation */
+.drawer-nav {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.drawer-menu {
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+.drawer-menu .p-menu-list {
+  padding: 0;
+}
+
+.drawer-menu .p-menuitem {
+  margin: 0;
+}
+
+/* Improve menu item active/hover/focus states */
+.drawer-menu .p-menuitem-link {
+  padding: 0.875rem 1.5rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  color: var(--text-color);
+  background: transparent;
+  outline: none;
+  border: none;
+  font-weight: 500;
+}
+.drawer-menu .p-menuitem-link:hover, .drawer-menu .p-menuitem-link:focus {
+  background: var(--surface-hover);
+  color: var(--primary-color);
+}
+.drawer-menu .p-menuitem-link.active {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+}
+.drawer-menu .p-menuitem-link.active:hover, .drawer-menu .p-menuitem-link.active:focus {
+  background: var(--primary-600, #1976d2);
+  color: #fff;
+}
+
+.drawer-menu .p-menuitem-icon {
+  margin-right: 0.75rem;
+  color: inherit;
+}
+
+.drawer-menu .p-menuitem-text {
+  font-weight: 500;
+  color: inherit;
+}
+
+/* Drawer Footer */
+.drawer-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--surface-border);
+  background: var(--surface-section);
+}
+
+.theme-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.theme-toggle .p-button {
+  color: var(--text-color-secondary);
+  transition: color 0.2s ease;
+}
+
+.theme-toggle .p-button:hover {
+  color: var(--text-color);
+  background: var(--surface-hover);
+}
+
+/* PrimeReact button overrides for Drawer */
+.app-drawer .p-button {
+  background: var(--surface-section);
+  color: var(--text-color-secondary);
+  border: none;
+  transition: background 0.2s, color 0.2s;
+}
+.app-drawer .p-button:hover, .app-drawer .p-button:focus {
+  background: var(--surface-hover);
+  color: var(--primary-color);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--surface-card);
+  border-radius: 8px;
+  border: 1px solid var(--surface-border);
+}
+
+/* User info avatar contrast */
+.user-avatar {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 700;
+  border: 2px solid var(--surface-section);
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+}
+
+.user-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-drawer {
+    width: 100% !important;
+  }
+  
+  .drawer-header {
+    padding: 1rem;
+  }
+  
+  .drawer-nav {
+    padding: 0.5rem 0;
+  }
+  
+  .drawer-menu .p-menuitem-link {
+    padding: 1rem 1.5rem;
+  }
+  
+  .drawer-footer {
+    padding: 1rem;
+  }
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .app-drawer {
+  background: var(--surface-ground);
+  box-shadow: 2px 0 24px 0 rgba(0,0,0,0.32);
+}
+[data-theme="dark"] .drawer-header,
+[data-theme="dark"] .drawer-footer {
+  background: var(--surface-section);
+  border-color: var(--surface-border);
+}
+[data-theme="dark"] .drawer-menu .p-menuitem-link {
+  color: var(--text-color);
+  background: transparent;
+}
+[data-theme="dark"] .drawer-menu .p-menuitem-link:hover, [data-theme="dark"] .drawer-menu .p-menuitem-link:focus {
+  background: var(--surface-hover);
+  color: var(--primary-color);
+}
+[data-theme="dark"] .drawer-menu .p-menuitem-link.active {
+  background: var(--primary-color);
+  color: #fff;
+}
+[data-theme="dark"] .drawer-menu .p-menuitem-link.active:hover, [data-theme="dark"] .drawer-menu .p-menuitem-link.active:focus {
+  background: var(--primary-600, #1565c0);
+  color: #fff;
+}
+[data-theme="dark"] .app-drawer .p-button {
+  background: var(--surface-section);
+  color: var(--text-color-secondary);
+}
+[data-theme="dark"] .app-drawer .p-button:hover, [data-theme="dark"] .app-drawer .p-button:focus {
+  background: var(--surface-hover);
+  color: var(--primary-color);
+}
+[data-theme="dark"] .user-info {
+  background: var(--surface-card);
+  border-color: var(--surface-border);
+}
+[data-theme="dark"] .user-avatar {
+  background: var(--primary-color);
+  color: #fff;
+  border: 2px solid var(--surface-section);
+} 

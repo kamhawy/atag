@@ -1,0 +1,229 @@
+/* Header Styles */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--surface-card);
+  border-bottom: 1px solid var(--surface-border);
+  height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.drawer-toggle-btn {
+  color: var(--text-color-secondary);
+  transition: color 0.2s ease;
+  margin-right: 0.5rem;
+}
+
+.drawer-toggle-btn:hover {
+  color: var(--text-color);
+  background: var(--surface-hover);
+}
+
+.header-breadcrumb {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.header-breadcrumb .p-breadcrumb {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.header-breadcrumb .p-breadcrumb-list {
+  margin: 0;
+  padding: 0;
+}
+
+.header-breadcrumb .p-menuitem-link {
+  color: var(--text-color-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.header-breadcrumb .p-menuitem-link:hover {
+  color: var(--text-color);
+}
+
+.header-breadcrumb .p-menuitem-icon {
+  color: var(--text-color-secondary);
+  font-size: 0.875rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.global-search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.global-search-input {
+  width: 300px;
+  border-radius: 20px;
+  border: 1px solid var(--surface-border);
+  background-color: var(--surface-ground);
+  color: var(--text-color);
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.global-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-color-alpha-20);
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-color-secondary);
+  pointer-events: none;
+}
+
+.search-btn {
+  color: var(--text-color-secondary);
+  transition: color 0.2s ease;
+}
+
+.search-btn:hover {
+  color: var(--primary-color);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.notification-btn,
+.user-btn {
+  color: var(--text-color-secondary);
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.notification-btn:hover,
+.user-btn:hover {
+  color: var(--text-color);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--red-500);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .global-search-input {
+    width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+    flex-direction: column;
+    height: auto;
+    gap: 1rem;
+  }
+
+  .header-left,
+  .header-right {
+    width: 100%;
+  }
+
+  .header-left {
+    justify-content: center;
+  }
+
+  .drawer-toggle-btn {
+    margin-right: 0;
+  }
+
+  .header-breadcrumb {
+    justify-content: center;
+  }
+
+  .global-search-form {
+    width: 100%;
+  }
+
+  .global-search-input {
+    width: 100%;
+    flex: 1;
+  }
+
+  .header-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.75rem;
+  }
+
+  .global-search-input {
+    font-size: 0.8rem;
+  }
+
+  .header-breadcrumb .p-menuitem-link {
+    font-size: 0.8rem;
+  }
+}
+
+/* Dark theme specific adjustments */
+[data-theme="dark"] .app-header {
+  background-color: var(--surface-card);
+  border-bottom-color: var(--surface-border);
+}
+
+[data-theme="dark"] .global-search-input {
+  background-color: var(--surface-ground);
+  border-color: var(--surface-border);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .global-search-input:focus {
+  border-color: var(--primary-color);
+}
+
+/* Animation for search icon */
+.p-input-icon-left .search-icon {
+  transition: color 0.2s ease;
+}
+
+.global-search-input:focus + .search-icon {
+  color: var(--primary-color);
+} 
