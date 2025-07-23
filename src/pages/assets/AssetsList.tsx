@@ -195,7 +195,7 @@ export const AssetsList: React.FC<AssetsListProps> = () => {
         <div className="search-row modern-search-row">
           <div className="search-input-group">
             <span className="p-input-icon-left">
-              <Search size={18} />
+              <Search size={16} className="search-icon-2" />
               <InputText
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}

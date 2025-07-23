@@ -13,6 +13,7 @@ import { Location } from "@/types/models";
 import { RefObject } from "react";
 import { useToast } from "@/hooks/useToast";
 import { sampleLocations } from "@/data/sampleData";
+import "./AssetLocations.css";
 
 interface AssetLocationsProps {
   toastRef?: RefObject<Toast | null>;

@@ -12,6 +12,7 @@ import { RefObject } from "react";
 import { useToast } from "@/hooks/useToast";
 import { sampleBrands } from "@/data/sampleData";
 import { AssetBrand } from "@/types/models";
+import "./AssetBrandForm.css";
 
 interface AssetBrandsProps {
   toastRef?: RefObject<Toast | null>;

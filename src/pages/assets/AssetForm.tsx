@@ -231,7 +231,7 @@ export const AssetForm: React.FC<AssetFormProps> = ({
       </div>
       <div className="header-right">
         <div className="search-box">
-          <Search size={16} />
+          <Search size={16} className="search-icon" />
           <InputText
             placeholder="Search assets..."
             value={globalFilter}

@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import { Card } from 'primereact/card';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
-import { Tag } from 'primereact/tag';
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
-import { Toast } from 'primereact/toast';
-import { 
-  Plus, 
-  Edit, 
-  Trash2
-} from 'lucide-react';
-import { RefObject } from 'react';
-import { useToast } from '@/hooks/useToast';
-import { sampleModels, sampleBrands, sampleAssetCategories } from '@/data/sampleData';
+import React, { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { Card } from "primereact/card";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Button } from "primereact/button";
+import { Tag } from "primereact/tag";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Toast } from "primereact/toast";
+import { Plus, Edit, Trash2 } from "lucide-react";
+import { RefObject } from "react";
+import { useToast } from "@/hooks/useToast";
+import {
+  sampleModels,
+  sampleBrands,
+  sampleAssetCategories
+} from "@/data/sampleData";
+import "../categories/AssetCategories.css";
+import "./AssetModelForm.css";
 
 interface AssetModelsProps {
   toastRef?: RefObject<Toast | null>;
@@ -28,27 +30,29 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
   const [models, setModels] = useState(sampleModels);
 
   const getStatusSeverity = (status: string) => {
-    return status === 'active' ? 'success' : 'danger';
+    return status === "active" ? "success" : "danger";
   };
 
   const statusBodyTemplate = (rowData: any) => {
     return (
-      <Tag 
-        value={rowData.isActive ? 'Active' : 'Inactive'} 
-        severity={getStatusSeverity(rowData.isActive ? 'active' : 'inactive')}
+      <Tag
+        value={rowData.isActive ? "Active" : "Inactive"}
+        severity={getStatusSeverity(rowData.isActive ? "active" : "inactive")}
         className="status-tag"
       />
     );
   };
 
   const brandBodyTemplate = (rowData: any) => {
-    const brand = sampleBrands.find(b => b.id === rowData.brandId);
-    return brand ? brand.name : 'Unknown';
+    const brand = sampleBrands.find((b) => b.id === rowData.brandId);
+    return brand ? brand.name : "Unknown";
   };
 
   const categoryBodyTemplate = (rowData: any) => {
-    const category = sampleAssetCategories.find(c => c.id === rowData.categoryId);
-    return category ? category.name : 'Unknown';
+    const category = sampleAssetCategories.find(
+      (c) => c.id === rowData.categoryId
+    );
+    return category ? category.name : "Unknown";
   };
 
   const actionsBodyTemplate = (rowData: any) => {
@@ -77,19 +81,19 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
   const confirmDelete = (model: any) => {
     confirmDialog({
       message: `Are you sure you want to delete model "${model.name}"?`,
-      header: 'Delete Confirmation',
-      icon: 'pi pi-exclamation-triangle',
+      header: "Delete Confirmation",
+      icon: "pi pi-exclamation-triangle",
       accept: () => deleteModel(model.id)
     });
   };
 
   const deleteModel = (id: string) => {
-    setModels(models.filter(model => model.id !== id));
-    toast.showDeleted('Model');
+    setModels(models.filter((model) => model.id !== id));
+    toast.showDeleted("Model");
   };
 
   const openNew = () => {
-    navigate({ to: '/master/models/new' });
+    navigate({ to: "/master/models/new" });
   };
 
   return (
@@ -115,25 +119,66 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
           paginator
           rows={10}
           rowsPerPageOptions={[5, 10, 25, 50]}
-          tableStyle={{ minWidth: '50rem' }}
+          tableStyle={{ minWidth: "50rem" }}
           emptyMessage="No models found."
           loading={false}
           stripedRows
           showGridlines
           responsiveLayout="scroll"
         >
-          <Column field="name" header="Name" sortable style={{ minWidth: '200px' }} />
-          <Column field="code" header="Code" sortable style={{ minWidth: '120px' }} />
-          <Column field="brandId" header="Brand" body={brandBodyTemplate} sortable style={{ minWidth: '150px' }} />
-          <Column field="categoryId" header="Category" body={categoryBodyTemplate} sortable style={{ minWidth: '150px' }} />
-          <Column field="year" header="Year" sortable style={{ minWidth: '100px' }} />
-          <Column field="specifications" header="Specifications" style={{ minWidth: '200px' }} />
-          <Column field="isActive" header="Status" body={statusBodyTemplate} sortable style={{ minWidth: '120px' }} />
-          <Column header="Actions" body={actionsBodyTemplate} style={{ minWidth: '120px' }} />
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            style={{ minWidth: "200px" }}
+          />
+          <Column
+            field="code"
+            header="Code"
+            sortable
+            style={{ minWidth: "120px" }}
+          />
+          <Column
+            field="brandId"
+            header="Brand"
+            body={brandBodyTemplate}
+            sortable
+            style={{ minWidth: "150px" }}
+          />
+          <Column
+            field="categoryId"
+            header="Category"
+            body={categoryBodyTemplate}
+            sortable
+            style={{ minWidth: "150px" }}
+          />
+          <Column
+            field="year"
+            header="Year"
+            sortable
+            style={{ minWidth: "100px" }}
+          />
+          <Column
+            field="specifications"
+            header="Specifications"
+            style={{ minWidth: "200px" }}
+          />
+          <Column
+            field="isActive"
+            header="Status"
+            body={statusBodyTemplate}
+            sortable
+            style={{ minWidth: "120px" }}
+          />
+          <Column
+            header="Actions"
+            body={actionsBodyTemplate}
+            style={{ minWidth: "120px" }}
+          />
         </DataTable>
       </Card>
 
       <ConfirmDialog />
     </div>
   );
-}; 
+};

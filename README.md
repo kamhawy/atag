@@ -1,4 +1,4 @@
-# FAM - Facilities Asset Management
+# AMS - Asset Management Solution
 
 A modern, responsive web application for managing office facilities assets built with React, TypeScript, Vite, and PrimeReact.
 
@@ -24,7 +24,7 @@ A modern, responsive web application for managing office facilities assets built
 
 ## 📋 Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ## 🚀 Quick Start
@@ -129,7 +129,7 @@ Create a `.env` file in the root directory:
 
 ```env
 VITE_API_BASE_URL=http://localhost:5000/api
-VITE_APP_TITLE=FAM - Facilities Asset Management
+VITE_APP_TITLE=FAM - Asset Management Solution
 ```
 
 ### Theme Configuration
@@ -212,4 +212,4 @@ For support and questions:
 
 ---
 
-**FAM - Facilities Asset Management** - Making asset management simple and efficient. 
+**ASM - Asset Management Solution** - Making asset management simple and efficient.

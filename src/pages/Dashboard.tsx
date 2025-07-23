@@ -60,7 +60,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
     return (
       <div className="action-buttons">
         <Button
-          icon={<Search size={16} />}
+          icon={<Search size={16} className="search-icon" />}
           className="p-button-text p-button-rounded p-button-sm"
           tooltip="View Details"
         />

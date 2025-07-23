@@ -91,13 +91,33 @@
   box-shadow: 0 0 0 2px var(--primary-color-alpha-20);
 }
 
-.search-icon {
+.search-icon-0 {
   position: absolute;
   left: 0.75rem;
+  top: 25px;
+  transform: translateY(-50%);
+  color: var(--text-color-secondary);
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+.search-icon {
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-color-secondary);
   pointer-events: none;
+  transition: color 0.2s;
+}
+
+.search-icon-3 {
+  position: absolute;
+  transform: translateY(-50%);
+  color: var(--text-color-secondary);
+  left: 0.75rem;
+  top: 50%;
+  pointer-events: none;
+  transition: color 0.2s;
 }
 
 .search-btn {
@@ -220,10 +240,67 @@
 }
 
 /* Animation for search icon */
+.p-input-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .p-input-icon-left .search-icon {
   transition: color 0.2s ease;
+  top: 25px;
 }
 
 .global-search-input:focus + .search-icon {
   color: var(--primary-color);
-} 
+}
+
+/* Modern header button styles */
+.header-actions .p-button,
+.drawer-toggle-btn,
+.search-btn,
+.notification-btn,
+.theme-toggle-btn {
+  background: var(--surface-section);
+  color: var(--text-color-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(80, 120, 200, 0.06);
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+.header-actions .p-button:hover,
+.drawer-toggle-btn:hover,
+.search-btn:hover,
+.notification-btn:hover,
+.theme-toggle-btn:hover {
+  background: var(--primary-100);
+  color: var(--primary-color);
+  box-shadow: 0 4px 16px rgba(80, 120, 200, 0.13);
+}
+
+[data-theme="dark"] .header-actions .p-button,
+[data-theme="dark"] .drawer-toggle-btn,
+[data-theme="dark"] .search-btn,
+[data-theme="dark"] .notification-btn,
+[data-theme="dark"] .theme-toggle-btn {
+  background: var(--surface-section);
+  color: var(--text-color-secondary);
+  border: none;
+}
+[data-theme="dark"] .header-actions .p-button:hover,
+[data-theme="dark"] .drawer-toggle-btn:hover,
+[data-theme="dark"] .search-btn:hover,
+[data-theme="dark"] .notification-btn:hover,
+[data-theme="dark"] .theme-toggle-btn:hover {
+  background: var(--primary-900);
+  color: var(--primary-200);
+  box-shadow: 0 4px 16px rgba(40, 60, 100, 0.22);
+}

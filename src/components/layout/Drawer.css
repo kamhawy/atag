@@ -87,37 +87,55 @@
 /* Improve menu item active/hover/focus states */
 .drawer-menu .p-menuitem-link {
   padding: 0.875rem 1.5rem;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: all 0.2s;
   color: var(--text-color);
   background: transparent;
   outline: none;
   border: none;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
 }
 .drawer-menu .p-menuitem-link:hover, .drawer-menu .p-menuitem-link:focus {
   background: var(--surface-hover);
   color: var(--primary-color);
+  box-shadow: 0 2px 8px 0 rgba(80,120,200,0.10);
 }
 .drawer-menu .p-menuitem-link.active {
   background: var(--primary-color);
   color: #fff;
   font-weight: 600;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+  box-shadow: 0 4px 16px 0 rgba(80,120,200,0.13);
 }
-.drawer-menu .p-menuitem-link.active:hover, .drawer-menu .p-menuitem-link.active:focus {
-  background: var(--primary-600, #1976d2);
+.drawer-menu .p-menuitem-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 4px;
+  background: #fff;
+  opacity: 0.7;
+}
+.drawer-menu .p-menuitem-link.active,
+.drawer-menu .p-menuitem-link.active:hover,
+.drawer-menu .p-menuitem-link.active:focus {
   color: #fff;
+  background: var(--primary-600, #1976d2);
 }
-
 .drawer-menu .p-menuitem-icon {
   margin-right: 0.75rem;
   color: inherit;
+  font-size: 1.2em;
 }
-
 .drawer-menu .p-menuitem-text {
   font-weight: 500;
   color: inherit;
+  font-size: 1em;
 }
 
 /* Drawer Footer */
@@ -237,14 +255,15 @@
 [data-theme="dark"] .drawer-menu .p-menuitem-link:hover, [data-theme="dark"] .drawer-menu .p-menuitem-link:focus {
   background: var(--surface-hover);
   color: var(--primary-color);
+  box-shadow: 0 2px 8px 0 rgba(40,60,100,0.18);
 }
 [data-theme="dark"] .drawer-menu .p-menuitem-link.active {
   background: var(--primary-color);
   color: #fff;
 }
-[data-theme="dark"] .drawer-menu .p-menuitem-link.active:hover, [data-theme="dark"] .drawer-menu .p-menuitem-link.active:focus {
-  background: var(--primary-600, #1565c0);
-  color: #fff;
+[data-theme="dark"] .drawer-menu .p-menuitem-link.active::before {
+  background: var(--primary-200, #90caf9);
+  opacity: 1;
 }
 [data-theme="dark"] .app-drawer .p-button {
   background: var(--surface-section);
@@ -262,4 +281,33 @@
   background: var(--primary-color);
   color: #fff;
   border: 2px solid var(--surface-section);
+} 
+
+.drawer-menu .p-menu-separator {
+  height: 1px;
+  background: var(--surface-border);
+  margin: 0.5rem 1.5rem;
+  border: none;
+}
+
+.drawer-menu .p-menuitem-group-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1.2rem 1.5rem 0.5rem 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  background: transparent;
+  border: none;
+  display: block;
+}
+
+.drawer-menu .p-menuitem-group-label:first-child {
+  margin-top: 0;
+}
+
+[data-theme="dark"] .drawer-menu .p-menuitem-group-label {
+  color: var(--text-color-secondary);
 } 
