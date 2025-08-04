@@ -280,38 +280,3 @@
     height: 28px;
   }
 }
-
-/* Dark theme specific adjustments */
-[data-theme="dark"] .overview-card,
-[data-theme="dark"] .chart-card,
-[data-theme="dark"] .recent-assets-card {
-  background: var(--surface-card);
-  border-color: var(--surface-border);
-}
-
-[data-theme="dark"] .overview-card:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .recent-assets-table {
-  border-color: var(--surface-border);
-}
-
-[data-theme="dark"] .recent-assets-table .p-datatable-header,
-[data-theme="dark"] .recent-assets-table .p-datatable-thead > tr > th {
-  background: var(--surface-section);
-  border-color: var(--surface-border);
-}
-
-[data-theme="dark"] .recent-assets-table .p-datatable-tbody > tr > td {
-  border-color: var(--surface-border);
-}
-
-[data-theme="dark"] .recent-assets-table .p-datatable-tbody > tr:hover {
-  background: var(--surface-hover);
-}
-
-[data-theme="dark"] .recent-assets-table .p-paginator {
-  background: var(--surface-section);
-  border-color: var(--surface-border);
-} 

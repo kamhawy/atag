@@ -123,8 +123,8 @@ export const Drawer: React.FC<DrawerProps> = ({ visible, onHide }) => {
   ];
 
   const userInfo = {
-    name: "John Doe",
-    email: "john.doe@company.com",
+    name: "Ahmed Hussein",
+    email: "assetManager@company.com",
     role: "Asset Manager"
   };
 
@@ -137,19 +137,25 @@ export const Drawer: React.FC<DrawerProps> = ({ visible, onHide }) => {
       showCloseIcon={false}
       modal={true}
       blockScroll={true}
+      transitionOptions={{
+        classNames: "drawer-transition",
+        timeout: { enter: 300, exit: 250 }
+      }}
+      maskClassName="drawer-mask"
     >
       <div className="drawer-header">
         <div className="logo-container">
           <div className="logo-icon">
-            <Building size={32} />
+            <Building size={24} />
           </div>
           <h1 className="logo-text">AMS</h1>
         </div>
         <Button
-          icon={<X size={24} />}
           className="p-button-text p-button-rounded close-btn"
           onClick={onHide}
-        />
+        >
+          <X size={24} />
+        </Button>
       </div>
 
       <nav className="drawer-nav">

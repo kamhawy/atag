@@ -50,7 +50,9 @@
 .header-breadcrumb .p-menuitem-link {
   color: var(--text-color-secondary);
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 1rem;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
 }
 
 .header-breadcrumb .p-menuitem-link:hover {
@@ -59,7 +61,7 @@
 
 .header-breadcrumb .p-menuitem-icon {
   color: var(--text-color-secondary);
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .header-right {
@@ -106,16 +108,6 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-color-secondary);
-  pointer-events: none;
-  transition: color 0.2s;
-}
-
-.search-icon-3 {
-  position: absolute;
-  transform: translateY(-50%);
-  color: var(--text-color-secondary);
-  left: 0.75rem;
-  top: 50%;
   pointer-events: none;
   transition: color 0.2s;
 }
@@ -223,22 +215,6 @@
   }
 }
 
-/* Dark theme specific adjustments */
-[data-theme="dark"] .app-header {
-  background-color: var(--surface-card);
-  border-bottom-color: var(--surface-border);
-}
-
-[data-theme="dark"] .global-search-input {
-  background-color: var(--surface-ground);
-  border-color: var(--surface-border);
-  color: var(--text-color);
-}
-
-[data-theme="dark"] .global-search-input:focus {
-  border-color: var(--primary-color);
-}
-
 /* Animation for search icon */
 .p-input-icon-left {
   position: relative;
@@ -275,6 +251,17 @@
     background 0.2s,
     color 0.2s,
     box-shadow 0.2s;
+  padding: 0;
+}
+
+.header-actions .p-button svg,
+.drawer-toggle-btn svg,
+.search-btn svg,
+.notification-btn svg,
+.theme-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 .header-actions .p-button:hover,
 .drawer-toggle-btn:hover,
@@ -284,23 +271,4 @@
   background: var(--primary-100);
   color: var(--primary-color);
   box-shadow: 0 4px 16px rgba(80, 120, 200, 0.13);
-}
-
-[data-theme="dark"] .header-actions .p-button,
-[data-theme="dark"] .drawer-toggle-btn,
-[data-theme="dark"] .search-btn,
-[data-theme="dark"] .notification-btn,
-[data-theme="dark"] .theme-toggle-btn {
-  background: var(--surface-section);
-  color: var(--text-color-secondary);
-  border: none;
-}
-[data-theme="dark"] .header-actions .p-button:hover,
-[data-theme="dark"] .drawer-toggle-btn:hover,
-[data-theme="dark"] .search-btn:hover,
-[data-theme="dark"] .notification-btn:hover,
-[data-theme="dark"] .theme-toggle-btn:hover {
-  background: var(--primary-900);
-  color: var(--primary-200);
-  box-shadow: 0 4px 16px rgba(40, 60, 100, 0.22);
 }

@@ -4,21 +4,21 @@ import { Theme, ThemeContextType, ThemeProviderProps } from "@/types/ui";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const PRIMEREACT_LIGHT =
-  "primereact/resources/themes/lara-light-blue/theme.css";
-const PRIMEREACT_DARK = "primereact/resources/themes/lara-dark-blue/theme.css";
-
 function setPrimeReactTheme(theme: Theme) {
-  // Remove any existing theme link
-  const id = "prime-theme-link";
-  let link = document.getElementById(id) as HTMLLinkElement | null;
-  if (link) link.remove();
-  // Add the correct theme
-  link = document.createElement("link");
-  link.id = id;
-  link.rel = "stylesheet";
-  link.href = theme === "dark" ? PRIMEREACT_DARK : PRIMEREACT_LIGHT;
-  document.head.appendChild(link);
+  // PrimeReact themes work by adding/removing CSS classes to the body
+  if (typeof document !== "undefined") {
+    const body = document.body;
+
+    // Remove existing theme classes
+    body.classList.remove("lara-light-blue", "lara-dark-blue");
+
+    // Add the appropriate theme class
+    body.classList.add(theme);
+
+    // Also set data-theme for our custom components (use simplified theme name)
+    const simpleTheme = theme === "lara-dark-blue" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", simpleTheme);
+  }
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
@@ -34,9 +34,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ) {
-      return "dark";
+      return "lara-dark-blue";
     }
-    return "light";
+    return "lara-light-blue";
   });
 
   const setTheme = (newTheme: Theme) => {
@@ -45,18 +45,18 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       localStorage.setItem("ams-theme", newTheme);
     }
     if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-theme", newTheme);
       setPrimeReactTheme(newTheme);
     }
   };
 
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setTheme(
+      theme === "lara-light-blue" ? "lara-dark-blue" : "lara-light-blue"
+    );
   };
 
   useEffect(() => {
     if (typeof document !== "undefined") {
-      document.documentElement.setAttribute("data-theme", theme);
       setPrimeReactTheme(theme);
     }
   }, [theme]);

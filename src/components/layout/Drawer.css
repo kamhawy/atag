@@ -3,8 +3,16 @@
   width: 280px !important;
   background: var(--surface-card);
   border-right: 1px solid var(--surface-border);
-  box-shadow: 2px 0 16px 0 rgba(0,0,0,0.08); /* subtle elevation */
-  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 2px 0 16px 0 rgba(0, 0, 0, 0.08); /* subtle elevation */
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+  /* Ensure smooth animations */
+  will-change: transform, opacity;
+}
+
+.app-drawer .p-sidebar-header {
+  display: none;
 }
 
 .app-drawer .p-sidebar-content {
@@ -34,8 +42,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   background: var(--primary-color);
   border-radius: 12px;
   color: white;
@@ -55,10 +63,13 @@
   border: none;
   border-radius: 50%;
   padding: 0.25rem;
-  transition: color 0.2s, background 0.2s;
+  transition:
+    color 0.2s,
+    background 0.2s;
   outline: none;
 }
-.close-btn:hover, .close-btn:focus {
+.close-btn:hover,
+.close-btn:focus {
   color: var(--primary-color);
   background: var(--surface-hover);
   box-shadow: 0 0 0 2px var(--primary-color-alpha-20, #90caf955);
@@ -84,11 +95,20 @@
   margin: 0;
 }
 
+.drawer-menu .p-submenu-header {
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  color: var(--text-color);
+  font-weight: 700;
+  background: transparent;
+}
+
 /* Improve menu item active/hover/focus states */
 .drawer-menu .p-menuitem-link {
   padding: 0.875rem 1.5rem;
   border-radius: 8px;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   color: var(--text-color);
   background: transparent;
   outline: none;
@@ -98,20 +118,23 @@
   align-items: center;
   gap: 0.75rem;
   position: relative;
+  /* transform: translateX(0); */
 }
-.drawer-menu .p-menuitem-link:hover, .drawer-menu .p-menuitem-link:focus {
+.drawer-menu .p-menuitem-link:hover,
+.drawer-menu .p-menuitem-link:focus {
   background: var(--surface-hover);
   color: var(--primary-color);
-  box-shadow: 0 2px 8px 0 rgba(80,120,200,0.10);
+  box-shadow: 0 2px 8px 0 rgba(80, 120, 200, 0.1);
+  /* transform: translateX(4px); */
 }
 .drawer-menu .p-menuitem-link.active {
   background: var(--primary-color);
   color: #fff;
   font-weight: 600;
-  box-shadow: 0 4px 16px 0 rgba(80,120,200,0.13);
+  box-shadow: 0 4px 16px 0 rgba(80, 120, 200, 0.13);
 }
 .drawer-menu .p-menuitem-link.active::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 8px;
@@ -166,9 +189,12 @@
   background: var(--surface-section);
   color: var(--text-color-secondary);
   border: none;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
-.app-drawer .p-button:hover, .app-drawer .p-button:focus {
+.app-drawer .p-button:hover,
+.app-drawer .p-button:focus {
   background: var(--surface-hover);
   color: var(--primary-color);
 }
@@ -189,7 +215,7 @@
   color: #fff;
   font-weight: 700;
   border: 2px solid var(--surface-section);
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
 .user-details {
@@ -220,68 +246,23 @@
   .app-drawer {
     width: 100% !important;
   }
-  
+
   .drawer-header {
     padding: 1rem;
   }
-  
+
   .drawer-nav {
     padding: 0.5rem 0;
   }
-  
+
   .drawer-menu .p-menuitem-link {
     padding: 1rem 1.5rem;
   }
-  
+
   .drawer-footer {
     padding: 1rem;
   }
 }
-
-/* Dark Mode Adjustments */
-[data-theme="dark"] .app-drawer {
-  background: var(--surface-ground);
-  box-shadow: 2px 0 24px 0 rgba(0,0,0,0.32);
-}
-[data-theme="dark"] .drawer-header,
-[data-theme="dark"] .drawer-footer {
-  background: var(--surface-section);
-  border-color: var(--surface-border);
-}
-[data-theme="dark"] .drawer-menu .p-menuitem-link {
-  color: var(--text-color);
-  background: transparent;
-}
-[data-theme="dark"] .drawer-menu .p-menuitem-link:hover, [data-theme="dark"] .drawer-menu .p-menuitem-link:focus {
-  background: var(--surface-hover);
-  color: var(--primary-color);
-  box-shadow: 0 2px 8px 0 rgba(40,60,100,0.18);
-}
-[data-theme="dark"] .drawer-menu .p-menuitem-link.active {
-  background: var(--primary-color);
-  color: #fff;
-}
-[data-theme="dark"] .drawer-menu .p-menuitem-link.active::before {
-  background: var(--primary-200, #90caf9);
-  opacity: 1;
-}
-[data-theme="dark"] .app-drawer .p-button {
-  background: var(--surface-section);
-  color: var(--text-color-secondary);
-}
-[data-theme="dark"] .app-drawer .p-button:hover, [data-theme="dark"] .app-drawer .p-button:focus {
-  background: var(--surface-hover);
-  color: var(--primary-color);
-}
-[data-theme="dark"] .user-info {
-  background: var(--surface-card);
-  border-color: var(--surface-border);
-}
-[data-theme="dark"] .user-avatar {
-  background: var(--primary-color);
-  color: #fff;
-  border: 2px solid var(--surface-section);
-} 
 
 .drawer-menu .p-menu-separator {
   height: 1px;
@@ -308,6 +289,52 @@
   margin-top: 0;
 }
 
-[data-theme="dark"] .drawer-menu .p-menuitem-group-label {
-  color: var(--text-color-secondary);
-} 
+/* Drawer Animation Classes */
+.drawer-transition-enter {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.drawer-transition-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition:
+    transform 300ms ease-out,
+    opacity 300ms ease-out;
+}
+
+.drawer-transition-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.drawer-transition-exit-active {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition:
+    transform 250ms ease-in,
+    opacity 250ms ease-in;
+}
+
+/* Drawer Mask Animation */
+.drawer-mask {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  transition: opacity 300ms ease-out;
+}
+
+.drawer-mask.p-sidebar-mask-enter {
+  opacity: 0;
+}
+
+.drawer-mask.p-sidebar-mask-enter-active {
+  opacity: 1;
+}
+
+.drawer-mask.p-sidebar-mask-exit {
+  opacity: 1;
+}
+
+.drawer-mask.p-sidebar-mask-exit-active {
+  opacity: 0;
+}

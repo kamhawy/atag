@@ -55,11 +55,12 @@ export const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
     <header className="app-header">
       <div className="header-left">
         <Button
-          icon={<Menu size={20} />}
           className="p-button-text p-button-rounded drawer-toggle-btn"
           onClick={onDrawerToggle}
           tooltip="Toggle Navigation"
-        />
+        >
+          <Menu size={20} />
+        </Button>
         <BreadCrumb
           model={breadcrumbItems}
           home={home}
@@ -80,29 +81,38 @@ export const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
           </span>
           <Button
             type="submit"
-            icon={<Search size={16} className="search-icon-3" />}
-            className="p-button-text p-button-rounded search-btn"
+            className="p-button-outlined p-button-rounded search-btn"
             tooltip="Search"
-          />
+          >
+            <Search size={16} />
+          </Button>
         </form>
 
         <div className="header-actions">
           <Button
-            icon={<Bell size={20} />}
-            className="p-button-text p-button-rounded notification-btn"
+            className="p-button-outlined p-button-rounded notification-btn"
             tooltip="Notifications"
             badge="3"
             badgeClassName="notification-badge"
-          />
+          >
+            <Bell size={20} />
+          </Button>
 
           <Button
-            icon={theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-            className="p-button-text p-button-rounded theme-toggle-btn"
+            className="p-button-outlined p-button-rounded theme-toggle-btn"
             onClick={toggleTheme}
             tooltip={
-              theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"
+              theme === "lara-light-blue"
+                ? "Switch to Dark Mode"
+                : "Switch to Light Mode"
             }
-          />
+          >
+            {theme === "lara-light-blue" ? (
+              <Moon size={20} />
+            ) : (
+              <Sun size={20} />
+            )}
+          </Button>
         </div>
       </div>
     </header>

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 // Theme Types
-export type Theme = "light" | "dark";
+export type Theme = "lara-light-blue" | "lara-dark-blue";
 
 export interface ThemeContextType {
   theme: Theme;

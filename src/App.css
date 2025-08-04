@@ -1,254 +1,264 @@
-/* Import PrimeReact themes */
-/* @import "primereact/resources/themes/lara-light-blue/theme.css"; */
-/* @import "primereact/resources/themes/lara-dark-blue/theme.css"; */
-@import "primereact/resources/primereact.min.css";
-@import "primeicons/primeicons.css";
-@import "primeflex/primeflex.css";
+  /* Import PrimeReact themes */
+  @import "primereact/resources/themes/lara-light-blue/theme.css";
+  @import "primereact/resources/themes/lara-dark-blue/theme.css";
+  @import "primereact/resources/primereact.min.css";
+  @import "primeicons/primeicons.css";
+  @import "primeflex/primeflex.css";
 
-/* Override PrimeReact font variables */
-:root {
-  --font-family:
-    "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
+  /* Override PrimeReact font family */
+  :root {
+    --font-family:
+      "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+      "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  }
 
-/* App Layout */
-.app-container {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-}
+  /* App Layout */
+  .app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+  }
 
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 
-.page-container {
-  flex: 1;
-  padding: 1.5rem;
-  overflow-y: auto;
-  background-color: var(--surface-ground);
-}
+  .page-container {
+    flex: 1;
+    padding: 0.1rem 1.5rem 0.1rem 1.5rem;
+    overflow-y: auto;
+    background-color: var(--surface-ground);
+  }
 
-/* Dark theme overrides */
-[data-theme="dark"] {
-  --surface-ground: #1a1a1a;
-  --surface-section: #1e1e1e;
-  --surface-card: #2d2d2d;
-  --surface-overlay: #2d2d2d;
-  --surface-border: #404040;
-  --text-color: #ffffff;
-  --text-color-secondary: #a0a0a0;
-  --font-family:
-    "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
+  /* Theme font family overrides */
+  .lara-light-blue,
+  .lara-dark-blue,
+  .p-component {
+    --font-family:
+      "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+      "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  }
 
-/* Light theme overrides */
-[data-theme="light"] {
-  --surface-ground: #f8f9fa;
-  --surface-section: #ffffff;
-  --surface-card: #ffffff;
-  --surface-overlay: #ffffff;
-  --surface-border: #dee2e6;
-  --text-color: #495057;
-  --text-color-secondary: #6c757d;
-  --font-family:
-    "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-}
+  /* Global styles */
+  * {
+    box-sizing: border-box;
+  }
 
-/* Global styles */
-* {
-  box-sizing: border-box;
-}
+  /* Comprehensive font family application */
+  html,
+  body {
+    font-family:
+      "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+      "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  }
 
-/* Comprehensive font family application */
-html,
-body {
-  font-family:
-    "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
-}
+  body {
+    margin: 0;
+    background-color: var(--surface-ground);
+    color: var(--text-color);
+  }
 
-body {
-  margin: 0;
-  background-color: var(--surface-ground);
-  color: var(--text-color);
-}
+  /* Ensure all elements inherit the font family */
+  *,
+  *::before,
+  *::after {
+    font-family: inherit;
+  }
 
-/* Ensure all elements inherit the font family */
-*,
-*::before,
-*::after {
-  font-family: inherit;
-}
+  /* Override PrimeReact default fonts */
+  .p-component,
+  .p-button,
+  .p-inputtext,
+  .p-dropdown,
+  .p-multiselect,
+  .p-calendar,
+  .p-inputnumber,
+  .p-inputtextarea,
+  .p-password,
+  .p-checkbox,
+  .p-radiobutton,
+  .p-selectbutton,
+  .p-slider,
+  .p-rating,
+  .p-togglebutton,
+  .p-splitbutton,
+  .p-speeddial,
+  .p-toolbar,
+  .p-menubar,
+  .p-breadcrumb,
+  .p-tabmenu,
+  .p-steps,
+  .p-menu,
+  .p-menuitem,
+  .p-tieredmenu,
+  .p-contextmenu,
+  .p-overlaypanel,
+  .p-dialog,
+  .p-sidebar,
+  .p-overlay,
+  .p-tooltip,
+  .p-confirmdialog,
+  .p-toast,
+  .p-message,
+  .p-inline-message,
+  .p-card,
+  .p-panel,
+  .p-accordion,
+  .p-tabview,
+  .p-scrollpanel,
+  .p-toolbar,
+  .p-datatable,
+  .p-dataview,
+  .p-orderlist,
+  .p-picklist,
+  .p-tree,
+  .p-treetable,
+  .p-organizationchart,
+  .p-megamenu,
+  .p-panelmenu,
+  .p-slidemenu,
+  .p-tabmenu,
+  .p-breadcrumb,
+  .p-steps,
+  .p-carousel,
+  .p-galleria,
+  .p-image,
+  .p-fileupload,
+  .p-cascadeselect,
+  .p-chips,
+  .p-colorpicker,
+  .p-knob,
+  .p-listbox,
+  .p-mention,
+  .p-multiselect,
+  .p-password,
+  .p-rating,
+  .p-selectbutton,
+  .p-slider,
+  .p-togglebutton,
+  .p-tri-state-checkbox,
+  .p-inputswitch,
+  .p-textarea,
+  .p-inputtext,
+  .p-inputnumber,
+  .p-calendar,
+  .p-dropdown,
+  .p-multiselect,
+  .p-cascadeselect,
+  .p-listbox,
+  .p-mention,
+  .p-password,
+  .p-rating,
+  .p-selectbutton,
+  .p-slider,
+  .p-togglebutton,
+  .p-tri-state-checkbox,
+  .p-inputswitch,
+  .p-textarea,
+  .p-inputtext,
+  .p-inputnumber,
+  .p-calendar,
+  .p-dropdown,
+  .p-multiselect,
+  .p-cascadeselect,
+  .p-listbox,
+  .p-mention,
+  .p-password,
+  .p-rating,
+  .p-selectbutton,
+  .p-slider,
+  .p-togglebutton,
+  .p-tri-state-checkbox,
+  .p-inputswitch,
+  .p-textarea {
+    font-family:
+      "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+      "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  }
 
-/* Override PrimeReact default fonts */
-.p-component,
-.p-button,
-.p-inputtext,
-.p-dropdown,
-.p-multiselect,
-.p-calendar,
-.p-inputnumber,
-.p-inputtextarea,
-.p-password,
-.p-checkbox,
-.p-radiobutton,
-.p-selectbutton,
-.p-slider,
-.p-rating,
-.p-togglebutton,
-.p-splitbutton,
-.p-speeddial,
-.p-toolbar,
-.p-menubar,
-.p-breadcrumb,
-.p-tabmenu,
-.p-steps,
-.p-menu,
-.p-menuitem,
-.p-tieredmenu,
-.p-contextmenu,
-.p-overlaypanel,
-.p-dialog,
-.p-sidebar,
-.p-overlay,
-.p-tooltip,
-.p-confirmdialog,
-.p-toast,
-.p-message,
-.p-inline-message,
-.p-card,
-.p-panel,
-.p-accordion,
-.p-tabview,
-.p-scrollpanel,
-.p-toolbar,
-.p-datatable,
-.p-dataview,
-.p-orderlist,
-.p-picklist,
-.p-tree,
-.p-treetable,
-.p-organizationchart,
-.p-megamenu,
-.p-panelmenu,
-.p-slidemenu,
-.p-tabmenu,
-.p-breadcrumb,
-.p-steps,
-.p-carousel,
-.p-galleria,
-.p-image,
-.p-fileupload,
-.p-cascadeselect,
-.p-chips,
-.p-colorpicker,
-.p-knob,
-.p-listbox,
-.p-mention,
-.p-multiselect,
-.p-password,
-.p-rating,
-.p-selectbutton,
-.p-slider,
-.p-togglebutton,
-.p-tri-state-checkbox,
-.p-inputswitch,
-.p-textarea,
-.p-inputtext,
-.p-inputnumber,
-.p-calendar,
-.p-dropdown,
-.p-multiselect,
-.p-cascadeselect,
-.p-listbox,
-.p-mention,
-.p-password,
-.p-rating,
-.p-selectbutton,
-.p-slider,
-.p-togglebutton,
-.p-tri-state-checkbox,
-.p-inputswitch,
-.p-textarea,
-.p-inputtext,
-.p-inputnumber,
-.p-calendar,
-.p-dropdown,
-.p-multiselect,
-.p-cascadeselect,
-.p-listbox,
-.p-mention,
-.p-password,
-.p-rating,
-.p-selectbutton,
-.p-slider,
-.p-togglebutton,
-.p-tri-state-checkbox,
-.p-inputswitch,
-.p-textarea {
-  font-family:
-    "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
-}
+  /* Ensure form elements use the font */
+  input,
+  textarea,
+  select,
+  button {
+    font-family:
+      "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+      "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  }
 
-/* Ensure form elements use the font */
-input,
-textarea,
-select,
-button {
-  font-family:
-    "Open Sans", "Candara", "Calibri", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
-}
+  /* Utility classes */
+  .text-center {
+    text-align: center;
+  }
 
-/* Utility classes */
-.text-center {
-  text-align: center;
-}
+  .mb-0 {
+    margin-bottom: 0;
+  }
 
-.mb-0 {
-  margin-bottom: 0;
-}
+  .mt-0 {
+    margin-top: 0;
+  }
 
-.mt-0 {
-  margin-top: 0;
-}
+  .p-0 {
+    padding: 0;
+  }
 
-.p-0 {
-  padding: 0;
-}
+  @font-face {
+    font-family: "Open Sans";
+    src: url("./assets/fonts/OpenSans-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Open Sans";
+    src: url("./assets/fonts/OpenSans-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Open Sans";
+    src: url("./assets/fonts/OpenSans-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
 
-@font-face {
-  font-family: "Open Sans";
-  src: url("./assets/fonts/OpenSans-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Open Sans";
-  src: url("./assets/fonts/OpenSans-SemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Open Sans";
-  src: url("./assets/fonts/OpenSans-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+  body,
+  html,
+  #root {
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  }
 
-body,
-html,
-#root {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-}
+  /* Tooltip z-index fixes - let PrimeReact handle styling */
+  .p-tooltip {
+    z-index: 1000 !important;
+  }
+
+  .p-tooltip .p-tooltip-text,
+  .p-tooltip .p-tooltip-arrow {
+    z-index: 1001 !important;
+  }
+
+  /* Additional z-index fixes for other overlay elements */
+  .p-dialog {
+    z-index: 1000 !important;
+  }
+
+  .p-overlaypanel {
+    z-index: 1000 !important;
+  }
+
+  .p-dropdown-panel,
+  .p-multiselect-panel,
+  .p-calendar-panel {
+    z-index: 1000 !important;
+  }
+
+  .p-datepicker {
+    z-index: 1000 !important;
+  }
