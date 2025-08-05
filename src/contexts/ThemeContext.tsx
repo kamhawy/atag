@@ -39,30 +39,29 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     return "lara-light-blue";
   });
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-    if (typeof localStorage !== "undefined") {
-      localStorage.setItem("ams-theme", newTheme);
-    }
-    if (typeof document !== "undefined") {
-      setPrimeReactTheme(newTheme);
-    }
+  const setTheme = (newTheme: Theme | ((prevTheme: Theme) => Theme)) => {
+    setThemeState((prevTheme) => {
+      const resolvedTheme =
+        typeof newTheme === "function" ? newTheme(prevTheme) : newTheme;
+
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem("ams-theme", resolvedTheme);
+      }
+      if (typeof document !== "undefined") {
+        setPrimeReactTheme(resolvedTheme);
+      }
+
+      return resolvedTheme;
+    });
   };
 
   const toggleTheme = () => {
-    setTheme(
-      theme === "lara-light-blue" ? "lara-dark-blue" : "lara-light-blue"
+    setTheme((prevTheme) =>
+      prevTheme === "lara-light-blue" ? "lara-dark-blue" : "lara-light-blue"
     );
   };
 
   useEffect(() => {
-    if (typeof document !== "undefined") {
-      setPrimeReactTheme(theme);
-    }
-  }, [theme]);
-
-  useEffect(() => {
-    // On mount, ensure correct theme is loaded
     if (typeof document !== "undefined") {
       setPrimeReactTheme(theme);
     }

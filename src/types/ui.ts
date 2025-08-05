@@ -6,7 +6,7 @@ export type Theme = "lara-light-blue" | "lara-dark-blue";
 export interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
-  setTheme: (theme: Theme) => void;
+  setTheme: (theme: Theme | ((prevTheme: Theme) => Theme)) => void;
 }
 
 export interface ThemeProviderProps {

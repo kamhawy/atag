@@ -97,7 +97,7 @@ export const AssetBrands: React.FC<AssetBrandsProps> = ({ toastRef }) => {
         </div>
       </div>
 
-      <Card>
+      <Card className="asset-brands-card">
         <DataTable
           value={brands}
           paginator

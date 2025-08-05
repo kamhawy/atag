@@ -113,7 +113,7 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
         </div>
       </div>
 
-      <Card>
+      <Card className="asset-models-card">
         <DataTable
           value={models}
           paginator

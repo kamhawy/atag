@@ -132,7 +132,7 @@ export const AssetLocations: React.FC<AssetLocationsProps> = ({ toastRef }) => {
         </div>
       </div>
 
-      <Card>
+      <Card className="asset-locations-card">
         <DataTable
           value={locations}
           paginator
