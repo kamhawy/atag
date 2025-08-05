@@ -1,60 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Dropdown } from 'primereact/dropdown';
-import { Card } from 'primereact/card';
-import { useToast } from '@/hooks/useToast';
-import { sampleAssetCategories } from '@/data/sampleData';
-import './AssetCategoryForm.css';
-import { Toast } from 'primereact/toast';
-import { CategoryFormData } from '@/types/models';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Dropdown } from "primereact/dropdown";
+import { Card } from "primereact/card";
+import { useToast } from "@/hooks/useToast";
+import { sampleAssetCategories } from "@/data/sampleData";
+import "./AssetCategoryForm.css";
+import { Toast } from "primereact/toast";
+import { Category } from "@/types/models";
 
 interface AssetCategoryFormProps {
   categoryId: string;
-  mode?: 'add' | 'edit';
+  mode?: "add" | "edit";
   toastRef?: React.RefObject<Toast | null>;
 }
 
-export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId, mode, toastRef }) => {
+export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({
+  categoryId,
+  mode,
+  toastRef
+}) => {
   const navigate = useNavigate();
   const { showSuccess, showError } = useToast(toastRef || { current: null });
 
-  const [formData, setFormData] = useState<CategoryFormData>({
-    id: '',
-    name: '',
-    code: '',
-    description: '',
-    parentCategory: null,
-    color: '#3B82F6',
-    icon: 'tag'
+  const [formData, setFormData] = useState<Category>({
+    id: "",
+    name: "",
+    code: "",
+    description: "",
+    parentCategory: "",
+    color: "#3B82F6",
+    icon: "tag",
+    status: "active",
+    assetCount: 0,
+    lastUpdated: ""
   });
 
   const [loading, setLoading] = useState(false);
-  const isEditMode = categoryId !== 'new';
-  const isAddMode = mode === 'add' || categoryId === 'new';
+  const isEditMode = categoryId !== "new";
+  const isAddMode = mode === "add" || categoryId === "new";
 
   useEffect(() => {
     if (isEditMode && categoryId) {
       // Load existing category data
-      const existingCategory = sampleAssetCategories.find((cat) => cat.id === categoryId);
+      const existingCategory = sampleAssetCategories.find(
+        (cat) => cat.id === categoryId
+      );
       if (existingCategory) {
         setFormData({
           id: existingCategory.id,
           name: existingCategory.name,
           code: existingCategory.code,
           description: existingCategory.description,
-          parentCategory: existingCategory.parentCategory || null,
+          parentCategory: existingCategory.parentCategory || "",
           color: existingCategory.color,
-          icon: existingCategory.icon
+          icon: existingCategory.icon,
+          status: existingCategory.status || "active",
+          assetCount: existingCategory.assetCount || 0,
+          lastUpdated: existingCategory.lastUpdated || ""
         });
       }
     }
   }, [categoryId, isEditMode]);
 
-  const handleInputChange = (field: keyof CategoryFormData, value: unknown) => {
-    setFormData(prev => ({
+  const handleInputChange = (field: keyof Category, value: unknown) => {
+    setFormData((prev) => ({
       ...prev,
       [field]: value
     }));
@@ -66,24 +78,24 @@ export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId
 
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (isEditMode) {
-        showSuccess('Category updated successfully');
+        showSuccess("Category updated successfully");
       } else {
-        showSuccess('Category created successfully');
+        showSuccess("Category created successfully");
       }
 
-      navigate({ to: '/master/categories' });
+      navigate({ to: "/master/categories" });
     } catch {
-      showError('Failed to save category');
+      showError("Failed to save category");
     } finally {
       setLoading(false);
     }
   };
 
   const handleCancel = () => {
-    navigate({ to: '/master/categories' });
+    navigate({ to: "/master/categories" });
   };
 
   const parentCategoryOptions = sampleAssetCategories
@@ -91,30 +103,30 @@ export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId
     .map((cat) => ({ label: cat.name, value: cat.id }));
 
   const iconOptions = [
-    { label: 'Chair', value: 'chair' },
-    { label: 'Desk', value: 'desk' },
-    { label: 'Monitor', value: 'monitor' },
-    { label: 'Computer', value: 'computer' },
-    { label: 'Package', value: 'package' },
-    { label: 'Flask', value: 'flask' },
-    { label: 'Settings', value: 'settings' },
-    { label: 'Tag', value: 'tag' }
+    { label: "Chair", value: "chair" },
+    { label: "Desk", value: "desk" },
+    { label: "Monitor", value: "monitor" },
+    { label: "Computer", value: "computer" },
+    { label: "Package", value: "package" },
+    { label: "Flask", value: "flask" },
+    { label: "Settings", value: "settings" },
+    { label: "Tag", value: "tag" }
   ];
 
   const colorOptions = [
-    { label: 'Blue', value: '#3B82F6' },
-    { label: 'Green', value: '#10B981' },
-    { label: 'Yellow', value: '#F59E0B' },
-    { label: 'Red', value: '#EF4444' },
-    { label: 'Purple', value: '#8B5CF6' },
-    { label: 'Gray', value: '#6B7280' }
+    { label: "Blue", value: "#3B82F6" },
+    { label: "Green", value: "#10B981" },
+    { label: "Yellow", value: "#F59E0B" },
+    { label: "Red", value: "#EF4444" },
+    { label: "Purple", value: "#8B5CF6" },
+    { label: "Gray", value: "#6B7280" }
   ];
 
   return (
     <div className="asset-category-form">
       <Card>
         <div className="form-header">
-          <h2>{isAddMode ? 'Add Category' : 'Edit Category'}</h2>
+          <h2>{isAddMode ? "Add Category" : "Edit Category"}</h2>
           <div className="form-actions">
             <Button
               label="Cancel"
@@ -123,7 +135,7 @@ export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId
               onClick={handleCancel}
             />
             <Button
-              label={isAddMode ? 'Create' : 'Update'}
+              label={isAddMode ? "Create" : "Update"}
               icon="pi pi-check"
               onClick={handleSubmit}
               loading={loading}
@@ -138,7 +150,7 @@ export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId
               <InputText
                 id="name"
                 value={formData.name}
-                onChange={(e) => handleInputChange('name', e.target.value)}
+                onChange={(e) => handleInputChange("name", e.target.value)}
                 placeholder="Enter category name"
                 required
               />
@@ -149,7 +161,7 @@ export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId
               <InputText
                 id="code"
                 value={formData.code}
-                onChange={(e) => handleInputChange('code', e.target.value)}
+                onChange={(e) => handleInputChange("code", e.target.value)}
                 placeholder="Enter category code"
                 required
               />
@@ -161,7 +173,7 @@ export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId
                 id="parentCategory"
                 value={formData.parentCategory}
                 options={parentCategoryOptions}
-                onChange={(e) => handleInputChange('parentCategory', e.value)}
+                onChange={(e) => handleInputChange("parentCategory", e.value)}
                 placeholder="Select parent category"
                 showClear
               />
@@ -173,7 +185,7 @@ export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId
                 id="color"
                 value={formData.color}
                 options={colorOptions}
-                onChange={(e) => handleInputChange('color', e.value)}
+                onChange={(e) => handleInputChange("color", e.value)}
                 placeholder="Select color"
               />
             </div>
@@ -184,7 +196,7 @@ export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId
                 id="icon"
                 value={formData.icon}
                 options={iconOptions}
-                onChange={(e) => handleInputChange('icon', e.value)}
+                onChange={(e) => handleInputChange("icon", e.value)}
                 placeholder="Select icon"
               />
             </div>
@@ -194,7 +206,9 @@ export const AssetCategoryForm: React.FC<AssetCategoryFormProps> = ({ categoryId
               <InputTextarea
                 id="description"
                 value={formData.description}
-                onChange={(e) => handleInputChange('description', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("description", e.target.value)
+                }
                 placeholder="Enter category description"
                 rows={4}
               />

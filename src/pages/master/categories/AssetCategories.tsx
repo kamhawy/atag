@@ -10,7 +10,7 @@ import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Toast } from "primereact/toast";
 import { Plus, Edit, Trash2, Tag as TagIcon } from "lucide-react";
 import "./AssetCategories.css";
-import { AssetCategory } from "@/types/models";
+import { Category } from "@/types/models";
 import { useToast } from "@/hooks/useToast";
 import { sampleAssetCategories } from "@/data/sampleData";
 
@@ -24,7 +24,7 @@ export const AssetCategories: React.FC<AssetCategoriesProps> = ({
   const navigate = useNavigate();
   const toast = useToast(toastRef || { current: null });
   // Use centralized sample data
-  const [categories, setCategories] = useState<AssetCategory[]>(
+  const [categories, setCategories] = useState<Category[]>(
     sampleAssetCategories
   );
 
@@ -32,7 +32,7 @@ export const AssetCategories: React.FC<AssetCategoriesProps> = ({
     return status === "active" ? "success" : "danger";
   };
 
-  const statusBodyTemplate = (rowData: AssetCategory) => {
+  const statusBodyTemplate = (rowData: Category) => {
     return (
       <Tag
         value={rowData.status}
@@ -42,7 +42,7 @@ export const AssetCategories: React.FC<AssetCategoriesProps> = ({
     );
   };
 
-  const colorBodyTemplate = (rowData: AssetCategory) => {
+  const colorBodyTemplate = (rowData: Category) => {
     return (
       <div className="color-indicator">
         <div
@@ -54,7 +54,7 @@ export const AssetCategories: React.FC<AssetCategoriesProps> = ({
     );
   };
 
-  const iconBodyTemplate = (rowData: AssetCategory) => {
+  const iconBodyTemplate = (rowData: Category) => {
     return (
       <div className="icon-display">
         <TagIcon size={16} />
@@ -63,7 +63,7 @@ export const AssetCategories: React.FC<AssetCategoriesProps> = ({
     );
   };
 
-  const actionsBodyTemplate = (rowData: AssetCategory) => {
+  const actionsBodyTemplate = (rowData: Category) => {
     return (
       <div className="action-buttons">
         <Button
@@ -82,11 +82,11 @@ export const AssetCategories: React.FC<AssetCategoriesProps> = ({
     );
   };
 
-  const editCategory = (category: AssetCategory) => {
+  const editCategory = (category: Category) => {
     navigate({ to: `/master/categories/${category.id}` });
   };
 
-  const confirmDelete = (category: AssetCategory) => {
+  const confirmDelete = (category: Category) => {
     confirmDialog({
       message: `Are you sure you want to delete category "${category.name}"?`,
       header: "Delete Confirmation",
@@ -127,7 +127,7 @@ export const AssetCategories: React.FC<AssetCategoriesProps> = ({
           paginator
           rows={10}
           rowsPerPageOptions={[10, 20, 50]}
-          className="asset-categories-table"
+          className="common-data-table"
           emptyMessage="No categories found"
           loading={false}
           stripedRows
@@ -187,7 +187,7 @@ export const AssetCategories: React.FC<AssetCategoriesProps> = ({
             field="lastUpdated"
             header="Last Updated"
             sortable
-            style={{ minWidth: "120px" }}
+            style={{ minWidth: "165px" }}
           />
           <Column
             header="Actions"

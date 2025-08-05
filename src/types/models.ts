@@ -80,7 +80,7 @@ export interface Location {
   isActive?: boolean;
 }
 
-export interface AssetCategory {
+export interface Category {
   id: string;
   name: string;
   code: string;
@@ -93,42 +93,19 @@ export interface AssetCategory {
   lastUpdated: string;
 }
 
-export interface CategoryFormData {
-  id: string;
-  name: string;
-  code: string;
-  description: string;
-  parentCategory: string | null;
-  color: string;
-  icon: string;
-}
-
-export interface LocationFormData {
-  id: string;
-  name: string;
-  code: string;
-  description: string;
-  parentLocation: string | null;
-  address: string;
-  contactPerson: string;
-  contactEmail: string;
-  contactPhone: string;
-  isActive: boolean;
-}
-
-export interface ModelFormData {
+export interface Model {
   id: string;
   name: string;
   code: string;
   description: string;
   brandId: string;
   categoryId: string;
-  year: number | null;
+  year: number;
   specifications: string;
   isActive: boolean;
 }
 
-export interface AssetBrand {
+export interface Brand {
   id: string;
   name: string;
   code: string;
@@ -139,15 +116,23 @@ export interface AssetBrand {
   isActive: boolean;
 }
 
-export interface BrandFormData {
+export interface SystemSetting {
   id: string;
+  category: string;
   name: string;
-  code: string;
+  value: string | boolean | number;
+  type: "string" | "boolean" | "number" | "date";
   description: string;
-  website: string;
-  contactEmail: string;
-  contactPhone: string;
-  isActive: boolean;
+  editable: boolean;
+}
+
+export interface SystemLog {
+  id: string;
+  timestamp: string;
+  level: "info" | "warning" | "error" | "debug";
+  message: string;
+  user: string;
+  action: string;
 }
 
 // Common status types

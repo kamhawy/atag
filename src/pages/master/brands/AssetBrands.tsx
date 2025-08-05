@@ -11,8 +11,8 @@ import { Plus, Edit, Trash2 } from "lucide-react";
 import { RefObject } from "react";
 import { useToast } from "@/hooks/useToast";
 import { sampleBrands } from "@/data/sampleData";
-import { AssetBrand } from "@/types/models";
-import "./AssetBrandForm.css";
+import { Brand } from "@/types/models";
+import "./AssetBrands.css";
 
 interface AssetBrandsProps {
   toastRef?: RefObject<Toast | null>;
@@ -29,7 +29,7 @@ export const AssetBrands: React.FC<AssetBrandsProps> = ({ toastRef }) => {
     return status === "active" ? "success" : "danger";
   };
 
-  const statusBodyTemplate = (rowData: AssetBrand) => {
+  const statusBodyTemplate = (rowData: Brand) => {
     return (
       <Tag
         value={rowData.isActive ? "Active" : "Inactive"}
@@ -39,7 +39,7 @@ export const AssetBrands: React.FC<AssetBrandsProps> = ({ toastRef }) => {
     );
   };
 
-  const actionsBodyTemplate = (rowData: AssetBrand) => {
+  const actionsBodyTemplate = (rowData: Brand) => {
     return (
       <div className="action-buttons">
         <Button
@@ -58,11 +58,11 @@ export const AssetBrands: React.FC<AssetBrandsProps> = ({ toastRef }) => {
     );
   };
 
-  const editBrand = (brand: AssetBrand) => {
+  const editBrand = (brand: Brand) => {
     navigate({ to: `/master/brands/${brand.id}` });
   };
 
-  const confirmDelete = (brand: AssetBrand) => {
+  const confirmDelete = (brand: Brand) => {
     confirmDialog({
       message: `Are you sure you want to delete brand "${brand.name}"?`,
       header: "Delete Confirmation",
@@ -104,6 +104,7 @@ export const AssetBrands: React.FC<AssetBrandsProps> = ({ toastRef }) => {
           rows={10}
           rowsPerPageOptions={[5, 10, 25, 50]}
           tableStyle={{ minWidth: "50rem" }}
+          className="common-data-table"
           emptyMessage="No brands found."
           loading={false}
           stripedRows

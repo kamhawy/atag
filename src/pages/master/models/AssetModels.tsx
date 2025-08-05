@@ -15,8 +15,8 @@ import {
   sampleBrands,
   sampleAssetCategories
 } from "@/data/sampleData";
-import "../categories/AssetCategories.css";
-import "./AssetModelForm.css";
+import "./AssetModels.css";
+import { Model } from "@/types/models";
 
 interface AssetModelsProps {
   toastRef?: RefObject<Toast | null>;
@@ -33,7 +33,7 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
     return status === "active" ? "success" : "danger";
   };
 
-  const statusBodyTemplate = (rowData: any) => {
+  const statusBodyTemplate = (rowData: Model) => {
     return (
       <Tag
         value={rowData.isActive ? "Active" : "Inactive"}
@@ -43,19 +43,19 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
     );
   };
 
-  const brandBodyTemplate = (rowData: any) => {
+  const brandBodyTemplate = (rowData: Model) => {
     const brand = sampleBrands.find((b) => b.id === rowData.brandId);
     return brand ? brand.name : "Unknown";
   };
 
-  const categoryBodyTemplate = (rowData: any) => {
+  const categoryBodyTemplate = (rowData: Model) => {
     const category = sampleAssetCategories.find(
       (c) => c.id === rowData.categoryId
     );
     return category ? category.name : "Unknown";
   };
 
-  const actionsBodyTemplate = (rowData: any) => {
+  const actionsBodyTemplate = (rowData: Model) => {
     return (
       <div className="action-buttons">
         <Button
@@ -74,11 +74,11 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
     );
   };
 
-  const editModel = (model: any) => {
+  const editModel = (model: Model) => {
     navigate({ to: `/master/models/${model.id}` });
   };
 
-  const confirmDelete = (model: any) => {
+  const confirmDelete = (model: Model) => {
     confirmDialog({
       message: `Are you sure you want to delete model "${model.name}"?`,
       header: "Delete Confirmation",
@@ -120,6 +120,7 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
           rows={10}
           rowsPerPageOptions={[5, 10, 25, 50]}
           tableStyle={{ minWidth: "50rem" }}
+          className="common-data-table"
           emptyMessage="No models found."
           loading={false}
           stripedRows

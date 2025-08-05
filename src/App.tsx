@@ -4,8 +4,8 @@ import { Drawer } from "@/components/layout/Drawer";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Toast } from "primereact/toast";
 import { Tooltip } from "primereact/tooltip";
-import { Dashboard } from "@/pages/Dashboard";
-import { AssetsList } from "@/pages/assets/AssetsList";
+import { Dashboard } from "@/pages/home/Dashboard";
+import { AssetsCatalogue } from "@/pages/assets/AssetsCatalogue";
 import { AssetLocations } from "@/pages/master/locations/AssetLocations";
 import { AssetForm } from "@/pages/assets/AssetForm";
 import { useCurrentPage } from "@/hooks/useCurrentPage";
@@ -35,7 +35,7 @@ const App: React.FC<AppProps> = () => {
       case Pages.DASHBOARD:
         return <Dashboard toastRef={toastRef} />;
       case Pages.ASSETS:
-        return <AssetsList toastRef={toastRef} />;
+        return <AssetsCatalogue toastRef={toastRef} />;
       case Pages.ASSET_LOCATIONS:
         return <AssetLocations toastRef={toastRef} />;
       case Pages.ASSET_FORM:

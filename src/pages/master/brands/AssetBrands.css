@@ -1,9 +1,9 @@
-.asset-categories {
+.asset-brands {
   padding: 1.5rem 0.1rem 1.5rem 0.1rem;
   max-width: 100%;
 }
 
-.asset-categories-header {
+.asset-brands-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,20 +12,20 @@
   gap: 1rem;
 }
 
-.asset-categories-header-left h1 {
+.asset-brands-header-left h1 {
   margin: 0;
   font-size: 2rem;
   font-weight: 600;
   color: var(--text-color);
 }
 
-.asset-categories-header-left p {
+.asset-brands-header-left p {
   margin: 0.5rem 0 0 0;
   color: var(--text-color-secondary);
   font-size: 1rem;
 }
 
-.asset-categories-header-right {
+.asset-brands-header-right {
   display: flex;
   gap: 0.5rem;
 }
@@ -42,16 +42,16 @@
   border-radius: 6px;
 }
 
-.asset-categories-card {
+.asset-brands-card {
   background: var(--surface-card);
   border: 1px solid var(--surface-border);
   border-radius: 12px;
 }
 
-.asset-categories-card .p-card-body {
+.asset-brands-card .p-card-body {
   padding: 1.5rem;
 }
 
-.asset-categories-card .p-card-body .p-card-content {
+.asset-brands-card .p-card-body .p-card-content {
   padding: 0rem;
 }

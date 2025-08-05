@@ -1,7 +1,5 @@
-@import '../categories/AssetCategories.css';
-/* Asset Locations Styles */
 .asset-locations {
-  padding: 1.5rem;
+  padding: 1.5rem 0.1rem 1.5rem 0.1rem;
   max-width: 100%;
 }
 
@@ -37,48 +35,14 @@
   background: var(--surface-card);
   border: 1px solid var(--surface-border);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .asset-locations-card .p-card-body {
-  padding: 0;
+  padding: 1.5rem;
 }
 
-.asset-locations-table {
-  border: none;
-}
-
-.asset-locations-table .p-datatable-header {
-  background: var(--surface-section);
-  border-bottom: 1px solid var(--surface-border);
-  padding: 1rem;
-}
-
-.asset-locations-table .p-datatable-thead > tr > th {
-  background: var(--surface-section);
-  border-bottom: 1px solid var(--surface-border);
-  color: var(--text-color);
-  font-weight: 600;
-  padding: 1rem 0.75rem;
-  text-align: left;
-}
-
-.asset-locations-table .p-datatable-tbody > tr > td {
-  padding: 1rem 0.75rem;
-  border-bottom: 1px solid var(--surface-border);
-  color: var(--text-color);
-}
-
-.asset-locations-table .p-datatable-tbody > tr:hover {
-  background: var(--surface-hover);
-}
-
-.asset-locations-table .p-datatable-tbody > tr:nth-child(even) {
-  background: var(--surface-ground);
-}
-
-.asset-locations-table .p-datatable-tbody > tr:nth-child(even):hover {
-  background: var(--surface-hover);
+.asset-locations-card .p-card-body .p-card-content {
+  padding: 0rem;
 }
 
 /* Status Tags */
@@ -132,124 +96,10 @@
   gap: 1rem;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-field.full-width {
-  grid-column: 1 / -1;
-}
-
-.form-field label {
-  font-weight: 500;
-  color: var(--text-color);
-  font-size: 0.875rem;
-}
-
-.form-field .p-inputtext,
-.form-field .p-dropdown,
-.form-field .p-inputtextarea {
-  width: 100%;
-}
-
 .dialog-footer {
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
-}
-
-/* Pagination */
-.asset-locations-table .p-paginator {
-  background: var(--surface-section);
-  border-top: 1px solid var(--surface-border);
-  padding: 1rem;
-}
-
-.asset-locations-table .p-paginator .p-paginator-pages .p-paginator-page {
-  border-radius: 6px;
-  margin: 0 0.125rem;
-}
-
-/* --- Asset Categories Table Styles (applied to Asset Locations) --- */
-.asset-categories-card {
-  background: var(--surface-card);
-  border: 1px solid var(--surface-border);
-  border-radius: 12px;
-}
-
-.asset-categories-card .p-card-body {
-  padding: 1.5rem;
-}
-
-.asset-categories-table {
-  border: 1px solid var(--surface-border);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.asset-categories-table .p-datatable-header {
-  background: var(--surface-section);
-  border-bottom: 1px solid var(--surface-border);
-  padding: 1rem 1.5rem;
-}
-
-.asset-categories-table .p-datatable-thead>tr>th {
-  background: var(--surface-section);
-  border-bottom: 1px solid var(--surface-border);
-  color: var(--text-color);
-  font-weight: 600;
-  padding: 1rem 1.5rem;
-  font-size: 0.875rem;
-}
-
-.asset-categories-table .p-datatable-tbody>tr>td {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--surface-border);
-  color: var(--text-color);
-  font-size: 0.875rem;
-}
-
-.asset-categories-table .p-datatable-tbody>tr:hover {
-  background: var(--surface-hover);
-}
-
-.asset-categories-table .p-datatable-tbody>tr:nth-child(even) {
-  background: var(--surface-ground);
-}
-
-.asset-categories-table .p-datatable-tbody>tr:nth-child(even):hover {
-  background: var(--surface-hover);
-}
-
-.action-buttons {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-}
-
-.action-buttons .p-button {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-}
-
-.asset-categories-table .p-paginator {
-  background: var(--surface-section);
-  border-top: 1px solid var(--surface-border);
-  padding: 1rem 1.5rem;
-}
-
-.asset-categories-table .p-paginator .p-paginator-pages .p-paginator-page {
-  border-radius: 6px;
-  margin: 0 0.125rem;
 }
 
 /* Responsive Design */
@@ -267,31 +117,11 @@
     width: 100%;
   }
 
-  .asset-locations-card .p-card-body {
-    padding: 0.5rem;
-  }
-
-  .asset-locations-table .p-datatable-thead > tr > th,
-  .asset-locations-table .p-datatable-tbody > tr > td {
-    padding: 0.75rem 0.5rem;
-    font-size: 0.875rem;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-
   .asset-locations-header-left h1 {
     font-size: 1.5rem;
   }
 
   .asset-locations-card .p-card-body {
     padding: 0.25rem;
-  }
-
-  .asset-locations-table .p-datatable-thead > tr > th,
-  .asset-locations-table .p-datatable-tbody > tr > td {
-    padding: 0.5rem 0.25rem;
-    font-size: 0.75rem;
   }
 }

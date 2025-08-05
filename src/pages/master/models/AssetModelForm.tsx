@@ -1,42 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Dropdown } from 'primereact/dropdown';
-import { InputNumber } from 'primereact/inputnumber';
-import { Card } from 'primereact/card';
-import { useToast } from '@/hooks/useToast';
-import { sampleModels, sampleBrands, sampleAssetCategories } from '@/data/sampleData';
-import './AssetModelForm.css';
-import { Toast } from 'primereact/toast';
-import { ModelFormData } from '@/types/models';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Dropdown } from "primereact/dropdown";
+import { InputNumber } from "primereact/inputnumber";
+import { Card } from "primereact/card";
+import { useToast } from "@/hooks/useToast";
+import {
+  sampleModels,
+  sampleBrands,
+  sampleAssetCategories
+} from "@/data/sampleData";
+import "./AssetModelForm.css";
+import { Toast } from "primereact/toast";
+import { Model } from "@/types/models";
 
 interface AssetModelFormProps {
   modelId: string;
-  mode?: 'add' | 'edit';
+  mode?: "add" | "edit";
   toastRef?: React.RefObject<Toast | null>;
 }
 
-export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, toastRef }) => {
+export const AssetModelForm: React.FC<AssetModelFormProps> = ({
+  modelId,
+  mode,
+  toastRef
+}) => {
   const navigate = useNavigate();
   const { showSuccess, showError } = useToast(toastRef || { current: null });
 
-  const [formData, setFormData] = useState<ModelFormData>({
-    id: '',
-    name: '',
-    code: '',
-    description: '',
-    brandId: '',
-    categoryId: '',
-    year: null,
-    specifications: '',
+  const [formData, setFormData] = useState<Model>({
+    id: "",
+    name: "",
+    code: "",
+    description: "",
+    brandId: "",
+    categoryId: "",
+    year: 0,
+    specifications: "",
     isActive: true
   });
 
   const [loading, setLoading] = useState(false);
-  const isEditMode = modelId !== 'new';
-  const isAddMode = mode === 'add' || modelId === 'new';
+  const isEditMode = modelId !== "new";
+  const isAddMode = mode === "add" || modelId === "new";
 
   useEffect(() => {
     if (isEditMode && modelId) {
@@ -58,8 +66,8 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
     }
   }, [modelId, isEditMode]);
 
-  const handleInputChange = (field: keyof ModelFormData, value: unknown) => {
-    setFormData(prev => ({
+  const handleInputChange = (field: keyof Model, value: unknown) => {
+    setFormData((prev) => ({
       ...prev,
       [field]: value
     }));
@@ -71,7 +79,7 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
 
     try {
       // Simulate API call
-      await new Promise(resolve => {
+      await new Promise((resolve) => {
         // Simulate network delay
         const delay = 1000;
         const start = Date.now();
@@ -82,21 +90,21 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
       });
 
       if (isEditMode) {
-        showSuccess('Model updated successfully');
+        showSuccess("Model updated successfully");
       } else {
-        showSuccess('Model created successfully');
+        showSuccess("Model created successfully");
       }
 
-      navigate({ to: '/master/models' });
+      navigate({ to: "/master/models" });
     } catch {
-      showError('Failed to save model');
+      showError("Failed to save model");
     } finally {
       setLoading(false);
     }
   };
 
   const handleCancel = () => {
-    navigate({ to: '/master/models' });
+    navigate({ to: "/master/models" });
   };
 
   const brandOptions = sampleBrands.map((brand) => ({
@@ -113,7 +121,7 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
     <div className="asset-model-form">
       <Card>
         <div className="form-header">
-          <h2>{isAddMode ? 'Add Model' : 'Edit Model'}</h2>
+          <h2>{isAddMode ? "Add Model" : "Edit Model"}</h2>
           <div className="form-actions">
             <Button
               label="Cancel"
@@ -122,7 +130,7 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
               onClick={handleCancel}
             />
             <Button
-              label={isAddMode ? 'Create' : 'Update'}
+              label={isAddMode ? "Create" : "Update"}
               icon="pi pi-check"
               onClick={handleSubmit}
               loading={loading}
@@ -137,7 +145,7 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
               <InputText
                 id="name"
                 value={formData.name}
-                onChange={(e) => handleInputChange('name', e.target.value)}
+                onChange={(e) => handleInputChange("name", e.target.value)}
                 placeholder="Enter model name"
                 required
               />
@@ -148,7 +156,7 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
               <InputText
                 id="code"
                 value={formData.code}
-                onChange={(e) => handleInputChange('code', e.target.value)}
+                onChange={(e) => handleInputChange("code", e.target.value)}
                 placeholder="Enter model code"
                 required
               />
@@ -160,7 +168,7 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
                 id="brandId"
                 value={formData.brandId}
                 options={brandOptions}
-                onChange={(e) => handleInputChange('brandId', e.value)}
+                onChange={(e) => handleInputChange("brandId", e.value)}
                 placeholder="Select brand"
                 required
               />
@@ -172,7 +180,7 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
                 id="categoryId"
                 value={formData.categoryId}
                 options={categoryOptions}
-                onChange={(e) => handleInputChange('categoryId', e.value)}
+                onChange={(e) => handleInputChange("categoryId", e.value)}
                 placeholder="Select category"
                 required
               />
@@ -183,7 +191,7 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
               <InputNumber
                 id="year"
                 value={formData.year}
-                onValueChange={(e) => handleInputChange('year', e.value)}
+                onValueChange={(e) => handleInputChange("year", e.value)}
                 placeholder="Enter year"
                 min={1900}
                 max={new Date().getFullYear() + 1}
@@ -195,7 +203,9 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
               <InputTextarea
                 id="specifications"
                 value={formData.specifications}
-                onChange={(e) => handleInputChange('specifications', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("specifications", e.target.value)
+                }
                 placeholder="Enter model specifications"
                 rows={3}
               />
@@ -206,7 +216,9 @@ export const AssetModelForm: React.FC<AssetModelFormProps> = ({ modelId, mode, t
               <InputTextarea
                 id="description"
                 value={formData.description}
-                onChange={(e) => handleInputChange('description', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("description", e.target.value)
+                }
                 placeholder="Enter model description"
                 rows={4}
               />

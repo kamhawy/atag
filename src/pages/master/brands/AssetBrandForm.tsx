@@ -1,39 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Card } from 'primereact/card';
-import { useToast } from '@/hooks/useToast';
-import { sampleBrands } from '@/data/sampleData';
-import './AssetBrandForm.css';
-import { Toast } from 'primereact/toast';
-import { BrandFormData } from '@/types/models';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Card } from "primereact/card";
+import { useToast } from "@/hooks/useToast";
+import { sampleBrands } from "@/data/sampleData";
+import "./AssetBrandForm.css";
+import { Toast } from "primereact/toast";
+import { Brand } from "@/types/models";
 
 interface AssetBrandFormProps {
   brandId: string;
-  mode?: 'add' | 'edit';
+  mode?: "add" | "edit";
   toastRef?: React.RefObject<Toast | null>;
 }
 
-export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, toastRef }) => {
+export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({
+  brandId,
+  mode,
+  toastRef
+}) => {
   const navigate = useNavigate();
   const { showSuccess, showError } = useToast(toastRef || { current: null });
 
-  const [formData, setFormData] = useState<BrandFormData>({
-    id: '',
-    name: '',
-    code: '',
-    description: '',
-    website: '',
-    contactEmail: '',
-    contactPhone: '',
+  const [formData, setFormData] = useState<Brand>({
+    id: "",
+    name: "",
+    code: "",
+    description: "",
+    website: "",
+    contactEmail: "",
+    contactPhone: "",
     isActive: true
   });
 
   const [loading, setLoading] = useState(false);
-  const isEditMode = brandId !== 'new';
-  const isAddMode = mode === 'add' || brandId === 'new';
+  const isEditMode = brandId !== "new";
+  const isAddMode = mode === "add" || brandId === "new";
 
   useEffect(() => {
     if (isEditMode && brandId) {
@@ -54,8 +58,8 @@ export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, t
     }
   }, [brandId, isEditMode]);
 
-  const handleInputChange = (field: keyof BrandFormData, value: unknown) => {
-    setFormData(prev => ({
+  const handleInputChange = (field: keyof Brand, value: unknown) => {
+    setFormData((prev) => ({
       ...prev,
       [field]: value
     }));
@@ -67,31 +71,31 @@ export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, t
 
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (isEditMode) {
-        showSuccess('Brand updated successfully');
+        showSuccess("Brand updated successfully");
       } else {
-        showSuccess('Brand created successfully');
+        showSuccess("Brand created successfully");
       }
 
-      navigate({ to: '/master/brands' });
+      navigate({ to: "/master/brands" });
     } catch {
-      showError('Failed to save brand');
+      showError("Failed to save brand");
     } finally {
       setLoading(false);
     }
   };
 
   const handleCancel = () => {
-    navigate({ to: '/master/brands' });
+    navigate({ to: "/master/brands" });
   };
 
   return (
     <div className="asset-brand-form">
       <Card>
         <div className="form-header">
-          <h2>{isAddMode ? 'Add Brand' : 'Edit Brand'}</h2>
+          <h2>{isAddMode ? "Add Brand" : "Edit Brand"}</h2>
           <div className="form-actions">
             <Button
               label="Cancel"
@@ -100,7 +104,7 @@ export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, t
               onClick={handleCancel}
             />
             <Button
-              label={isAddMode ? 'Create' : 'Update'}
+              label={isAddMode ? "Create" : "Update"}
               icon="pi pi-check"
               onClick={handleSubmit}
               loading={loading}
@@ -115,7 +119,7 @@ export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, t
               <InputText
                 id="name"
                 value={formData.name}
-                onChange={(e) => handleInputChange('name', e.target.value)}
+                onChange={(e) => handleInputChange("name", e.target.value)}
                 placeholder="Enter brand name"
                 required
               />
@@ -126,7 +130,7 @@ export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, t
               <InputText
                 id="code"
                 value={formData.code}
-                onChange={(e) => handleInputChange('code', e.target.value)}
+                onChange={(e) => handleInputChange("code", e.target.value)}
                 placeholder="Enter brand code"
                 required
               />
@@ -138,7 +142,7 @@ export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, t
                 id="website"
                 type="url"
                 value={formData.website}
-                onChange={(e) => handleInputChange('website', e.target.value)}
+                onChange={(e) => handleInputChange("website", e.target.value)}
                 placeholder="Enter website URL"
               />
             </div>
@@ -149,7 +153,9 @@ export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, t
                 id="contactEmail"
                 type="email"
                 value={formData.contactEmail}
-                onChange={(e) => handleInputChange('contactEmail', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("contactEmail", e.target.value)
+                }
                 placeholder="Enter contact email"
               />
             </div>
@@ -159,7 +165,9 @@ export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, t
               <InputText
                 id="contactPhone"
                 value={formData.contactPhone}
-                onChange={(e) => handleInputChange('contactPhone', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("contactPhone", e.target.value)
+                }
                 placeholder="Enter contact phone"
               />
             </div>
@@ -169,7 +177,9 @@ export const AssetBrandForm: React.FC<AssetBrandFormProps> = ({ brandId, mode, t
               <InputTextarea
                 id="description"
                 value={formData.description}
-                onChange={(e) => handleInputChange('description', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("description", e.target.value)
+                }
                 placeholder="Enter brand description"
                 rows={4}
               />

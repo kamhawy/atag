@@ -139,6 +139,7 @@ export const AssetLocations: React.FC<AssetLocationsProps> = ({ toastRef }) => {
           rows={10}
           rowsPerPageOptions={[5, 10, 25, 50]}
           tableStyle={{ minWidth: "50rem" }}
+          className="common-data-table"
           emptyMessage="No locations found."
           loading={false}
           stripedRows

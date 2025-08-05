@@ -1,6 +1,7 @@
 /* Dashboard Styles */
 .dashboard {
-  padding: 0;
+  padding: 1.5rem 0.1rem 1.5rem 0.1rem;
+  max-width: 100%;
 }
 
 .dashboard-header {

@@ -10,10 +10,9 @@ import {
   MapPin,
   AlertTriangle,
   TrendingUp,
-  Plus,
-  Search
+  Search,
+  Edit
 } from "lucide-react";
-import "@/pages/Dashboard.css";
 import { AssetSummary } from "@/types/models";
 import { Toast } from "primereact/toast";
 import { RefObject } from "react";
@@ -22,6 +21,7 @@ import {
   dashboardStats,
   chartData
 } from "@/data/sampleData";
+import "./Dashboard.css";
 
 interface DashboardProps {
   toastRef?: RefObject<Toast | null>;
@@ -65,7 +65,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
           tooltip="View Details"
         />
         <Button
-          icon={<Plus size={16} />}
+          icon={<Edit size={16} />}
           className="p-button-text p-button-rounded p-button-sm"
           tooltip="Edit Asset"
         />
@@ -203,7 +203,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
           className="recent-assets-table"
           emptyMessage="No recent assets found"
         >
-          <Column field="id" header="Asset ID" style={{ width: "100px" }} />
+          <Column field="id" header="Asset ID" style={{ width: "125px" }} />
           <Column field="name" header="Asset Name" />
           <Column
             field="category"
@@ -224,7 +224,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
           <Column
             field="lastUpdated"
             header="Last Updated"
-            style={{ width: "120px" }}
+            style={{ width: "145px" }}
           />
           <Column
             header="Actions"

@@ -76,13 +76,13 @@
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .form-actions {
     width: 100%;
     justify-content: flex-end;
   }
-  
+
   .form-grid {
     grid-template-columns: 1fr;
   }
-} 
+}

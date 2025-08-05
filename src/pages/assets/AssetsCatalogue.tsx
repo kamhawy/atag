@@ -13,13 +13,13 @@ import { Toast } from "primereact/toast";
 import { RefObject } from "react";
 import { sampleAssetSearchData, dropdownOptions } from "@/data/sampleData";
 import { AssetCard } from "@/components/ui/AssetCard";
-import "./AssetsList.css";
+import "./AssetsCatalogue.css";
 
-interface AssetsListProps {
+interface AssetsCatalogueProps {
   toastRef?: RefObject<Toast | null>;
 }
 
-export const AssetsList: React.FC<AssetsListProps> = () => {
+export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
@@ -155,10 +155,7 @@ export const AssetsList: React.FC<AssetsListProps> = () => {
           <p>Search and manage facility assets</p>
         </div>
         <div className="search-header-right">
-          <Button
-            label="Add Asset"
-            className="p-button-primary modern-add-btn"
-          >
+          <Button label="Add Asset" className="p-button-primary modern-add-btn">
             <Plus size={20} />
           </Button>
         </div>

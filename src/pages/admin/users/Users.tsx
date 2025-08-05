@@ -12,6 +12,7 @@ import { RefObject } from "react";
 import { useToast } from "@/hooks/useToast";
 import { sampleUsers } from "@/data/sampleData";
 import { User } from "@/types/models";
+import "./Users.css";
 
 interface UsersProps {
   toastRef?: RefObject<Toast | null>;
@@ -130,13 +131,14 @@ export const Users: React.FC<UsersProps> = ({ toastRef }) => {
         </div>
       </div>
 
-      <Card>
+      <Card className="admin-users-card">
         <DataTable
           value={users}
           paginator
           rows={10}
           rowsPerPageOptions={[5, 10, 25, 50]}
           tableStyle={{ minWidth: "50rem" }}
+          className="common-data-table"
           emptyMessage="No users found."
           loading={false}
           stripedRows
@@ -153,13 +155,13 @@ export const Users: React.FC<UsersProps> = ({ toastRef }) => {
             field="firstName"
             header="First Name"
             sortable
-            style={{ minWidth: "120px" }}
+            style={{ minWidth: "140px" }}
           />
           <Column
             field="lastName"
             header="Last Name"
             sortable
-            style={{ minWidth: "120px" }}
+            style={{ minWidth: "140px" }}
           />
           <Column
             field="email"

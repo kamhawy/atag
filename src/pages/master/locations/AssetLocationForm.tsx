@@ -1,66 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Dropdown } from 'primereact/dropdown';
-import { Card } from 'primereact/card';
-import { useToast } from '@/hooks/useToast';
-import { sampleLocations } from '@/data/sampleData';
-import './AssetLocationForm.css';
-import { Toast } from 'primereact/toast';
-import { LocationFormData } from '@/types/models';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Dropdown } from "primereact/dropdown";
+import { Card } from "primereact/card";
+import { useToast } from "@/hooks/useToast";
+import { sampleLocations } from "@/data/sampleData";
+import "./AssetLocationForm.css";
+import { Toast } from "primereact/toast";
+import { Location } from "@/types/models";
 
 interface AssetLocationFormProps {
   locationId: string;
-  mode?: 'add' | 'edit';
+  mode?: "add" | "edit";
   toastRef?: React.RefObject<Toast | null>;
 }
 
-export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId, mode, toastRef }) => {
+export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({
+  locationId,
+  mode,
+  toastRef
+}) => {
   const navigate = useNavigate();
   const { showSuccess, showError } = useToast(toastRef || { current: null });
 
-  const [formData, setFormData] = useState<LocationFormData>({
-    id: '',
-    name: '',
-    code: '',
-    description: '',
-    parentLocation: null,
-    address: '',
-    contactPerson: '',
-    contactEmail: '',
-    contactPhone: '',
+  const [formData, setFormData] = useState<Location>({
+    id: "",
+    name: "",
+    code: "",
+    description: "",
+    parentLocation: "",
+    address: "",
+    contactPerson: "",
+    contactEmail: "",
+    contactPhone: "",
+    building: "",
+    floor: "",
+    room: "",
+    type: "office",
+    capacity: 0,
+    assetCount: 0,
+    lastUpdated: "",
+    status: "active",
     isActive: true
   });
 
   const [loading, setLoading] = useState(false);
-  const isEditMode = locationId !== 'new';
-  const isAddMode = mode === 'add' || locationId === 'new';
+  const isEditMode = locationId !== "new";
+  const isAddMode = mode === "add" || locationId === "new";
 
   useEffect(() => {
     if (isEditMode && locationId) {
       // Load existing location data
-      const existingLocation = sampleLocations.find((loc) => loc.id === locationId);
+      const existingLocation = sampleLocations.find(
+        (loc) => loc.id === locationId
+      );
       if (existingLocation) {
         setFormData({
           id: existingLocation.id,
           name: existingLocation.name,
-          code: existingLocation.code || '',
+          code: existingLocation.code || "",
           description: existingLocation.description,
-          parentLocation: existingLocation.parentLocation || null,
-          address: existingLocation.address || '',
-          contactPerson: existingLocation.contactPerson || '',
-          contactEmail: existingLocation.contactEmail || '',
-          contactPhone: existingLocation.contactPhone || '',
+          parentLocation: existingLocation.parentLocation || "",
+          address: existingLocation.address || "",
+          contactPerson: existingLocation.contactPerson || "",
+          contactEmail: existingLocation.contactEmail || "",
+          contactPhone: existingLocation.contactPhone || "",
+          building: existingLocation.building || "",
+          floor: existingLocation.floor || "",
+          room: existingLocation.room || "",
+          type: existingLocation.type || "office",
+          capacity: existingLocation.capacity || 0,
+          assetCount: existingLocation.assetCount || 0,
+          lastUpdated: existingLocation.lastUpdated || "",
+          status: existingLocation.status || "active",
           isActive: existingLocation.isActive ?? true
         });
       }
     }
   }, [locationId, isEditMode]);
 
-  const handleInputChange = (field: keyof LocationFormData, value: unknown) => {
-    setFormData(prev => ({
+  const handleInputChange = (field: keyof Location, value: unknown) => {
+    setFormData((prev) => ({
       ...prev,
       [field]: value
     }));
@@ -72,24 +94,24 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
 
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (isEditMode) {
-        showSuccess('Location updated successfully');
+        showSuccess("Location updated successfully");
       } else {
-        showSuccess('Location created successfully');
+        showSuccess("Location created successfully");
       }
 
-      navigate({ to: '/master/locations' });
+      navigate({ to: "/master/locations" });
     } catch {
-      showError('Failed to save location');
+      showError("Failed to save location");
     } finally {
       setLoading(false);
     }
   };
 
   const handleCancel = () => {
-    navigate({ to: '/master/locations' });
+    navigate({ to: "/master/locations" });
   };
 
   const parentLocationOptions = sampleLocations
@@ -100,7 +122,7 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
     <div className="asset-location-form">
       <Card>
         <div className="form-header">
-          <h2>{isAddMode ? 'Add Location' : 'Edit Location'}</h2>
+          <h2>{isAddMode ? "Add Location" : "Edit Location"}</h2>
           <div className="form-actions">
             <Button
               label="Cancel"
@@ -109,7 +131,7 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
               onClick={handleCancel}
             />
             <Button
-              label={isAddMode ? 'Create' : 'Update'}
+              label={isAddMode ? "Create" : "Update"}
               icon="pi pi-check"
               onClick={handleSubmit}
               loading={loading}
@@ -124,7 +146,7 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
               <InputText
                 id="name"
                 value={formData.name}
-                onChange={(e) => handleInputChange('name', e.target.value)}
+                onChange={(e) => handleInputChange("name", e.target.value)}
                 placeholder="Enter location name"
                 required
               />
@@ -135,7 +157,7 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
               <InputText
                 id="code"
                 value={formData.code}
-                onChange={(e) => handleInputChange('code', e.target.value)}
+                onChange={(e) => handleInputChange("code", e.target.value)}
                 placeholder="Enter location code"
                 required
               />
@@ -147,7 +169,7 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
                 id="parentLocation"
                 value={formData.parentLocation}
                 options={parentLocationOptions}
-                onChange={(e) => handleInputChange('parentLocation', e.value)}
+                onChange={(e) => handleInputChange("parentLocation", e.value)}
                 placeholder="Select parent location"
                 showClear
               />
@@ -158,7 +180,9 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
               <InputText
                 id="contactPerson"
                 value={formData.contactPerson}
-                onChange={(e) => handleInputChange('contactPerson', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("contactPerson", e.target.value)
+                }
                 placeholder="Enter contact person name"
               />
             </div>
@@ -169,7 +193,9 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
                 id="contactEmail"
                 type="email"
                 value={formData.contactEmail}
-                onChange={(e) => handleInputChange('contactEmail', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("contactEmail", e.target.value)
+                }
                 placeholder="Enter contact email"
               />
             </div>
@@ -179,7 +205,9 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
               <InputText
                 id="contactPhone"
                 value={formData.contactPhone}
-                onChange={(e) => handleInputChange('contactPhone', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("contactPhone", e.target.value)
+                }
                 placeholder="Enter contact phone"
               />
             </div>
@@ -189,7 +217,7 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
               <InputTextarea
                 id="address"
                 value={formData.address}
-                onChange={(e) => handleInputChange('address', e.target.value)}
+                onChange={(e) => handleInputChange("address", e.target.value)}
                 placeholder="Enter full address"
                 rows={3}
               />
@@ -200,7 +228,9 @@ export const AssetLocationForm: React.FC<AssetLocationFormProps> = ({ locationId
               <InputTextarea
                 id="description"
                 value={formData.description}
-                onChange={(e) => handleInputChange('description', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("description", e.target.value)
+                }
                 placeholder="Enter location description"
                 rows={4}
               />
