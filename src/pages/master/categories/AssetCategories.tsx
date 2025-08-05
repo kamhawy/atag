@@ -83,6 +83,9 @@ export const AssetCategories: React.FC<AssetCategoriesProps> = ({
   };
 
   const editCategory = (category: Category) => {
+    if (!category.id) {
+      return;
+    }
     navigate({ to: `/master/categories/${category.id}` });
   };
 

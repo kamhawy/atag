@@ -15,6 +15,7 @@
 .header-left {
   display: flex;
   align-items: center;
+  flex-direction: row;
   gap: 1rem;
   flex: 1;
 }
@@ -74,6 +75,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  position: relative;
 }
 
 .global-search-input {
@@ -96,11 +98,11 @@
 .search-icon-0 {
   position: absolute;
   left: 0.75rem;
-  top: 25px;
-  transform: translateY(-50%);
+  top: 1rem;
   color: var(--text-color-secondary);
   pointer-events: none;
   transition: color 0.2s;
+  z-index: 1;
 }
 
 .search-icon {
@@ -224,7 +226,8 @@
 
 .p-input-icon-left .search-icon {
   transition: color 0.2s ease;
-  top: 25px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .global-search-input:focus + .search-icon {
@@ -263,6 +266,7 @@
   height: 20px;
   flex-shrink: 0;
 }
+
 .header-actions .p-button:hover,
 .drawer-toggle-btn:hover,
 .search-btn:hover,

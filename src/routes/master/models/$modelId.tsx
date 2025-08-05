@@ -1,8 +1,17 @@
-import { createFileRoute, RouteComponent } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { AssetModelForm } from "@/pages/master/models/AssetModelForm";
 
 export const Route = createFileRoute("/master/models/$modelId")({
-  component: ((props: { params: { modelId: string } }) => (
-    <AssetModelForm modelId={props.params.modelId} />
-  )) as RouteComponent
+  component: ModelDetailRoute
 });
+
+function ModelDetailRoute() {
+  const { modelId } = Route.useParams();
+  
+  // Parameter validation
+  if (!modelId || modelId === "") {
+    return <div>Error: Model ID is required</div>;
+  }
+  
+  return <AssetModelForm modelId={modelId} />;
+}

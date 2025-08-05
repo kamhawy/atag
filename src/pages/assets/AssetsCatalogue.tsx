@@ -1,25 +1,34 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { Tag } from "primereact/tag";
 import { Dialog } from "primereact/dialog";
 import { Calendar } from "primereact/calendar";
 import { MultiSelect } from "primereact/multiselect";
 import { Chip } from "primereact/chip";
 import { Search, Filter, Plus, Download, RefreshCw } from "lucide-react";
-import { AssetSearch as AssetSearchModel } from "@/types/models";
+import { AssetSearch as AssetSearchModel, Asset } from "@/types/models";
 import { Toast } from "primereact/toast";
 import { RefObject } from "react";
-import { sampleAssetSearchData, dropdownOptions } from "@/data/sampleData";
+import { dropdownOptions, sampleAssets } from "@/data/sampleData";
 import { AssetCard } from "@/components/ui/AssetCard";
+import { AddAssetFormDialog } from "./AddAssetFormDialog";
+import { useToast } from "@/hooks/useToast";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { useNavigate } from "@tanstack/react-router";
 import "./AssetsCatalogue.css";
 
 interface AssetsCatalogueProps {
   toastRef?: RefObject<Toast | null>;
 }
 
-export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
+export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = ({
+  toastRef
+}) => {
+  const navigate = useNavigate();
+  const toast = useToast(toastRef || { current: null });
+
+  // Search and filter states
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
@@ -29,13 +38,28 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
     null
   ]);
   const [showFilters, setShowFilters] = useState(false);
-  const [selectedAsset, setSelectedAsset] = useState<AssetSearchModel | null>(
-    null
-  );
-  const [showAssetDialog, setShowAssetDialog] = useState(false);
 
-  // Use centralized sample data
-  const assets: AssetSearchModel[] = sampleAssetSearchData;
+  // Asset operation states
+  const [showAddDialog, setShowAddDialog] = useState(false);
+  const [assets, setAssets] = useState<Asset[]>(sampleAssets);
+
+  // Convert Asset to AssetSearch for display
+  const assetSearchData: AssetSearchModel[] = useMemo(() => {
+    return assets.map((asset) => ({
+      id: asset.id,
+      name: asset.name,
+      category: asset.category,
+      brand: asset.manufacturer,
+      model: asset.model,
+      location: asset.location,
+      status: asset.status as "active" | "maintenance" | "retired" | "lost",
+      purchaseDate: asset.purchaseDate.toISOString().split("T")[0],
+      warrantyExpiry: asset.warrantyExpiry.toISOString().split("T")[0],
+      value: asset.purchasePrice,
+      assignedTo: asset.assignedTo,
+      lastUpdated: asset.lastUpdated
+    }));
+  }, [assets]);
 
   // Use centralized dropdown options
   const categories = dropdownOptions.categories.map((opt) => opt.value);
@@ -44,7 +68,7 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
 
   // Filtered assets
   const filteredAssets = useMemo(() => {
-    return assets.filter((asset) => {
+    return assetSearchData.filter((asset) => {
       const matchesSearch =
         asset.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         asset.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -76,7 +100,7 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
       );
     });
   }, [
-    assets,
+    assetSearchData,
     searchTerm,
     selectedCategories,
     selectedStatuses,
@@ -84,34 +108,47 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
     dateRange
   ]);
 
+  // Asset operation handlers
+  const handleAddAsset = () => {
+    setShowAddDialog(true);
+  };
+
   const handleViewAsset = (asset: AssetSearchModel) => {
-    setSelectedAsset(asset);
-    setShowAssetDialog(true);
+    navigate({
+      to: "/assets/$assetId",
+      params: { assetId: asset.id },
+      search: { mode: "view" }
+    });
   };
 
   const handleEditAsset = (asset: AssetSearchModel) => {
-    // TODO: Implement edit functionality
-    console.log("Edit asset:", asset);
+    navigate({
+      to: "/assets/$assetId",
+      params: { assetId: asset.id },
+      search: { mode: "edit" }
+    });
   };
 
   const handleDeleteAsset = (asset: AssetSearchModel) => {
-    // TODO: Implement delete functionality
-    console.log("Delete asset:", asset);
+    confirmDialog({
+      message: `Are you sure you want to delete asset "${asset.name}"?`,
+      header: "Delete Confirmation",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        setAssets((prevAssets) => prevAssets.filter((a) => a.id !== asset.id));
+        toast.showDeleted("Asset");
+      }
+    });
   };
 
-  const getStatusSeverity = (status: string) => {
-    switch (status) {
-      case "active":
-        return "success";
-      case "maintenance":
-        return "warning";
-      case "retired":
-        return "danger";
-      case "lost":
-        return "info";
-      default:
-        return "info";
-    }
+  const handleSaveAsset = (savedAsset: Asset) => {
+    setAssets((prevAssets) => [...prevAssets, savedAsset]);
+    toast.showCreated("Asset");
+    setShowAddDialog(false);
+  };
+
+  const handleCancelAdd = () => {
+    setShowAddDialog(false);
   };
 
   const clearFilters = () => {
@@ -144,7 +181,8 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
 
   const exportData = () => {
     // TODO: Implement export functionality
-    // console.log('Exporting data...')
+    // console.log("Exporting data...");
+    toast.showInfo("Export functionality will be implemented soon");
   };
 
   return (
@@ -155,7 +193,11 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
           <p>Search and manage facility assets</p>
         </div>
         <div className="search-header-right">
-          <Button label="Add Asset" className="p-button-primary modern-add-btn">
+          <Button
+            label="Add Asset"
+            className="p-button-primary modern-add-btn"
+            onClick={handleAddAsset}
+          >
             <Plus size={20} />
           </Button>
         </div>
@@ -332,7 +374,7 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
       {/* Results Summary */}
       <div className="results-summary">
         <p>
-          Showing {filteredAssets.length} of {assets.length} assets
+          Showing {filteredAssets.length} of {assetSearchData.length} assets
         </p>
       </div>
 
@@ -367,70 +409,24 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = () => {
         )}
       </Card>
 
-      {/* Asset Details Dialog */}
+      {/* Add Asset Dialog */}
       <Dialog
-        visible={showAssetDialog}
-        onHide={() => setShowAssetDialog(false)}
-        header="Asset Details"
+        visible={showAddDialog}
+        onHide={handleCancelAdd}
+        header="Add New Asset"
         className="asset-dialog"
-        style={{ width: "600px" }}
+        style={{ width: "80vw", maxWidth: "1200px", maxHeight: "90vh" }}
+        modal
+        maximizable
+        contentStyle={{ maxHeight: "calc(90vh - 120px)", overflow: "auto" }}
       >
-        {selectedAsset && (
-          <div className="asset-details">
-            <div className="detail-row">
-              <label>Asset ID:</label>
-              <span>{selectedAsset.id}</span>
-            </div>
-            <div className="detail-row">
-              <label>Name:</label>
-              <span>{selectedAsset.name}</span>
-            </div>
-            <div className="detail-row">
-              <label>Category:</label>
-              <span>{selectedAsset.category}</span>
-            </div>
-            <div className="detail-row">
-              <label>Brand:</label>
-              <span>{selectedAsset.brand}</span>
-            </div>
-            <div className="detail-row">
-              <label>Model:</label>
-              <span>{selectedAsset.model}</span>
-            </div>
-            <div className="detail-row">
-              <label>Location:</label>
-              <span>{selectedAsset.location}</span>
-            </div>
-            <div className="detail-row">
-              <label>Status:</label>
-              <Tag
-                value={selectedAsset.status}
-                severity={getStatusSeverity(selectedAsset.status)}
-              />
-            </div>
-            <div className="detail-row">
-              <label>Value:</label>
-              <span>${selectedAsset.value.toLocaleString()}</span>
-            </div>
-            <div className="detail-row">
-              <label>Assigned To:</label>
-              <span>{selectedAsset.assignedTo}</span>
-            </div>
-            <div className="detail-row">
-              <label>Purchase Date:</label>
-              <span>{selectedAsset.purchaseDate}</span>
-            </div>
-            <div className="detail-row">
-              <label>Warranty Expiry:</label>
-              <span>{selectedAsset.warrantyExpiry}</span>
-            </div>
-            <div className="detail-row">
-              <label>Last Updated:</label>
-              <span>{selectedAsset.lastUpdated}</span>
-            </div>
-          </div>
-        )}
+        <AddAssetFormDialog
+          onSave={handleSaveAsset}
+          onCancel={handleCancelAdd}
+        />
       </Dialog>
+
+      <ConfirmDialog />
     </div>
   );
 };

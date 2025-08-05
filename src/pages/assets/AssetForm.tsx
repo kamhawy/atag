@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Card } from "primereact/card";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -26,22 +26,18 @@ import { useToast } from "@/hooks/useToast";
 import { sampleAssets, dropdownOptions } from "@/data/sampleData";
 import { Toast } from "primereact/toast";
 
-interface AssetFormProps {
+interface AddAssetFormProps {
   toastRef?: React.RefObject<Toast | null>;
-  mode?: "add" | "edit";
 }
 
-export const AssetForm: React.FC<AssetFormProps> = ({
-  toastRef,
-  mode = "add"
-}) => {
+export const AddAssetForm: React.FC<AddAssetFormProps> = ({ toastRef }) => {
   const toast = useToast(toastRef || { current: null });
   // Use centralized sample data
   const [assets, setAssets] = useState<Asset[]>(sampleAssets);
 
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [showDialog, setShowDialog] = useState(false);
-  const [isEdit, setIsEdit] = useState(mode === "edit");
+  const [isEdit, setIsEdit] = useState(false);
   const [globalFilter, setGlobalFilter] = useState("");
 
   // Use centralized dropdown options

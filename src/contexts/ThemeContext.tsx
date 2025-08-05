@@ -1,25 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
+import { PrimeReactProvider } from "primereact/api";
 import { Theme, ThemeContextType, ThemeProviderProps } from "@/types/ui";
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-function setPrimeReactTheme(theme: Theme) {
-  // PrimeReact themes work by adding/removing CSS classes to the body
-  if (typeof document !== "undefined") {
-    const body = document.body;
-
-    // Remove existing theme classes
-    body.classList.remove("lara-light-blue", "lara-dark-blue");
-
-    // Add the appropriate theme class
-    body.classList.add(theme);
-
-    // Also set data-theme for our custom components (use simplified theme name)
-    const simpleTheme = theme === "lara-dark-blue" ? "dark" : "light";
-    document.documentElement.setAttribute("data-theme", simpleTheme);
-  }
-}
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
@@ -47,30 +31,35 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       if (typeof localStorage !== "undefined") {
         localStorage.setItem("ams-theme", resolvedTheme);
       }
-      if (typeof document !== "undefined") {
-        setPrimeReactTheme(resolvedTheme);
-      }
 
       return resolvedTheme;
     });
   };
 
   const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === "lara-light-blue" ? "lara-dark-blue" : "lara-light-blue"
-    );
+    setTheme((prevTheme) => {
+      const newTheme =
+        prevTheme === "lara-light-blue" ? "lara-dark-blue" : "lara-light-blue";
+      return newTheme;
+    });
   };
 
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      setPrimeReactTheme(theme);
+  // PrimeReact configuration with proper APIOptions structure
+  const primeReactConfig = {
+    unstyled: false,
+    pt: {},
+    theme: {
+      name: theme,
+      dark: theme === "lara-dark-blue"
     }
-  }, [theme]);
+  };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <PrimeReactProvider value={primeReactConfig}>
+      <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+        {children}
+      </ThemeContext.Provider>
+    </PrimeReactProvider>
   );
 };
 

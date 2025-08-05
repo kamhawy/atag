@@ -8,6 +8,8 @@ export const useCurrentPage = () => {
     const updateCurrentPage = () => {
       const path =
         typeof window !== "undefined" ? window.location.pathname : "";
+      const searchParams = new URLSearchParams(window.location.search);
+      const mode = searchParams.get("mode");
 
       // Map paths to page types
       switch (path) {
@@ -30,9 +32,19 @@ export const useCurrentPage = () => {
         case "/assets":
           setCurrentPage(Pages.ASSETS);
           break;
-        case "/assets/":
-        case "/assets/new":
-          setCurrentPage(Pages.ASSET_FORM);
+        default:
+          // Handle dynamic asset routes
+          if (path.startsWith("/assets/")) {
+            // Check if it's an edit mode via query parameter
+            if (mode === "edit") {
+              setCurrentPage(Pages.ASSET_DETAIL_EDIT);
+            } else {
+              // It's a view route
+              setCurrentPage(Pages.ASSET_DETAIL_VIEW);
+            }
+          } else {
+            setCurrentPage(Pages.DASHBOARD);
+          }
           break;
         case "/admin/users":
           setCurrentPage(Pages.USERS);

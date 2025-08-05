@@ -13,8 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as MasterIndexRouteImport } from './routes/master/index'
 import { Route as AssetsIndexRouteImport } from './routes/assets/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AssetsNewRouteImport } from './routes/assets/new'
-import { Route as AssetsEditRouteImport } from './routes/assets/edit'
+import { Route as AssetsAssetIdRouteImport } from './routes/assets/$assetId'
 import { Route as MasterModelsIndexRouteImport } from './routes/master/models/index'
 import { Route as MasterLocationsIndexRouteImport } from './routes/master/locations/index'
 import { Route as MasterCategoriesIndexRouteImport } from './routes/master/categories/index'
@@ -52,14 +51,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AssetsNewRoute = AssetsNewRouteImport.update({
-  id: '/assets/new',
-  path: '/assets/new',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AssetsEditRoute = AssetsEditRouteImport.update({
-  id: '/assets/edit',
-  path: '/assets/edit',
+const AssetsAssetIdRoute = AssetsAssetIdRouteImport.update({
+  id: '/assets/$assetId',
+  path: '/assets/$assetId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MasterModelsIndexRoute = MasterModelsIndexRouteImport.update({
@@ -147,8 +141,7 @@ const AdminUsersUserIdRoute = AdminUsersUserIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/assets/edit': typeof AssetsEditRoute
-  '/assets/new': typeof AssetsNewRoute
+  '/assets/$assetId': typeof AssetsAssetIdRoute
   '/admin': typeof AdminIndexRoute
   '/assets': typeof AssetsIndexRoute
   '/master': typeof MasterIndexRoute
@@ -171,8 +164,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/assets/edit': typeof AssetsEditRoute
-  '/assets/new': typeof AssetsNewRoute
+  '/assets/$assetId': typeof AssetsAssetIdRoute
   '/admin': typeof AdminIndexRoute
   '/assets': typeof AssetsIndexRoute
   '/master': typeof MasterIndexRoute
@@ -196,8 +188,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/assets/edit': typeof AssetsEditRoute
-  '/assets/new': typeof AssetsNewRoute
+  '/assets/$assetId': typeof AssetsAssetIdRoute
   '/admin/': typeof AdminIndexRoute
   '/assets/': typeof AssetsIndexRoute
   '/master/': typeof MasterIndexRoute
@@ -222,8 +213,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/assets/edit'
-    | '/assets/new'
+    | '/assets/$assetId'
     | '/admin'
     | '/assets'
     | '/master'
@@ -246,8 +236,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/assets/edit'
-    | '/assets/new'
+    | '/assets/$assetId'
     | '/admin'
     | '/assets'
     | '/master'
@@ -270,8 +259,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/assets/edit'
-    | '/assets/new'
+    | '/assets/$assetId'
     | '/admin/'
     | '/assets/'
     | '/master/'
@@ -295,8 +283,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AssetsEditRoute: typeof AssetsEditRoute
-  AssetsNewRoute: typeof AssetsNewRoute
+  AssetsAssetIdRoute: typeof AssetsAssetIdRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AssetsIndexRoute: typeof AssetsIndexRoute
   MasterIndexRoute: typeof MasterIndexRoute
@@ -348,18 +335,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/assets/new': {
-      id: '/assets/new'
-      path: '/assets/new'
-      fullPath: '/assets/new'
-      preLoaderRoute: typeof AssetsNewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/assets/edit': {
-      id: '/assets/edit'
-      path: '/assets/edit'
-      fullPath: '/assets/edit'
-      preLoaderRoute: typeof AssetsEditRouteImport
+    '/assets/$assetId': {
+      id: '/assets/$assetId'
+      path: '/assets/$assetId'
+      fullPath: '/assets/$assetId'
+      preLoaderRoute: typeof AssetsAssetIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/master/models/': {
@@ -479,8 +459,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AssetsEditRoute: AssetsEditRoute,
-  AssetsNewRoute: AssetsNewRoute,
+  AssetsAssetIdRoute: AssetsAssetIdRoute,
   AdminIndexRoute: AdminIndexRoute,
   AssetsIndexRoute: AssetsIndexRoute,
   MasterIndexRoute: MasterIndexRoute,

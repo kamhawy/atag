@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Drawer } from "@/components/layout/Drawer";
 import { Header } from "@/components/layout/Header";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ThemeInitializer } from "@/components/ui/ThemeInitializer";
 import "@/App.css";
 
 const RootComponent = () => {
@@ -18,6 +19,7 @@ const RootComponent = () => {
 
   return (
     <ThemeProvider>
+      <ThemeInitializer />
       <div className="app-container">
         <Drawer visible={drawerVisible} onHide={handleDrawerHide} />
         <div className="main-content">

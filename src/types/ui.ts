@@ -32,8 +32,8 @@ export enum Pages {
   ASSET_MODEL_NEW = "/master/models/new",
   // Assets
   ASSETS = "/assets",
-  ASSET_FORM = "/assets/{assetId}",
-  ASSET_NEW = "/assets/new",
+  ASSET_DETAIL_VIEW = "/assets/{assetId}",
+  ASSET_DETAIL_EDIT = "/assets/{assetId}?mode=edit",
   // Admin
   ADMIN = "/admin",
   USERS = "/admin/users",

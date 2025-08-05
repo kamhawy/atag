@@ -1,0 +1,376 @@
+/* Asset Detail Page Styles */
+.asset-detail-page {
+  padding: 1rem;
+  background-color: var(--surface-ground);
+  min-height: 100vh;
+}
+
+/* Loading State */
+.asset-detail-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.loading-content {
+  text-align: center;
+  color: var(--text-color-secondary);
+}
+
+.loading-content p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Header */
+.asset-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--surface-card);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--surface-border);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  flex: 1;
+}
+
+.back-btn {
+  color: var(--text-color-secondary);
+  transition: color 0.2s ease;
+}
+
+.back-btn:hover {
+  color: var(--text-color);
+  background: var(--surface-hover);
+}
+
+.header-info h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.asset-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.asset-id {
+  font-family: "Courier New", monospace;
+  font-weight: 600;
+  color: var(--text-color-secondary);
+  background: var(--surface-section);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Content Grid */
+.asset-detail-content {
+  margin-top: 1rem;
+}
+.asset-detail-content .p-card-body,
+.asset-detail-content .p-card-body .p-card-content {
+  padding: 0;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 1.5rem;
+  margin: 0 auto;
+}
+
+/* Info Cards */
+.info-card {
+  background: var(--surface-card);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--surface-border);
+  overflow: hidden;
+}
+
+.card-header {
+  background: var(--surface-section);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+/* Form Styles */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field label {
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.875rem;
+}
+
+.form-field input,
+.form-field .p-dropdown,
+.form-field .p-calendar,
+.form-field .p-inputnumber,
+.form-field .p-inputtextarea {
+  width: 100%;
+}
+
+/* Ensure text displays properly in inputs */
+.form-field .p-inputtext,
+.form-field .p-dropdown-label,
+.form-field .p-calendar input {
+  overflow: visible;
+  word-wrap: break-word;
+}
+
+.form-field .p-invalid {
+  border-color: var(--red-500);
+}
+
+.form-field .p-error {
+  color: var(--red-500);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Specific Card Styles */
+.basic-info-card {
+  grid-column: 1 / -1; /* Span full width */
+  grid-row: 1;
+}
+
+.technical-info-card {
+  grid-column: 1 / 2;
+  grid-row: 2;
+}
+
+.financial-info-card {
+  grid-column: 2 / 3;
+  grid-row: 2;
+}
+
+.maintenance-info-card {
+  grid-column: 1 / 2;
+  grid-row: 3;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .basic-info-card,
+  .technical-info-card,
+  .financial-info-card,
+  .maintenance-info-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .asset-detail-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .header-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .header-actions {
+    justify-content: flex-start;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .asset-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .asset-detail-page {
+    padding: 0.5rem;
+  }
+
+  .asset-detail-header {
+    padding: 1rem;
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+
+  .header-info h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Button Styles */
+.header-actions .p-button {
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+  min-width: fit-content;
+}
+
+.header-actions .p-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Input Styles */
+.p-inputtext,
+.p-dropdown,
+.p-calendar,
+.p-inputnumber,
+.p-inputtextarea {
+  border-radius: 8px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-ground);
+  transition: all 0.2s ease;
+}
+
+.p-inputtext:focus,
+.p-dropdown:focus,
+.p-calendar:focus,
+.p-inputnumber:focus,
+.p-inputtextarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  outline: none;
+}
+
+.p-inputtext:disabled,
+.p-dropdown:disabled,
+.p-calendar:disabled,
+.p-inputnumber:disabled,
+.p-inputtextarea:disabled {
+  background: var(--surface-section);
+  color: var(--text-color-secondary);
+  cursor: not-allowed;
+}
+
+/* Tag Styles */
+.p-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Animation for edit mode */
+.info-card {
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Form validation styles */
+.p-invalid {
+  border-color: var(--red-500) !important;
+}
+
+.p-invalid:focus {
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+}
+
+.p-error {
+  color: var(--red-500);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Modern card hover effects */
+.info-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.info-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-600));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.info-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pi-spin {
+  animation: spin 1s linear infinite;
+}

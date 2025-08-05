@@ -6,8 +6,8 @@ import { Toast } from "primereact/toast";
 import { Tooltip } from "primereact/tooltip";
 import { Dashboard } from "@/pages/home/Dashboard";
 import { AssetsCatalogue } from "@/pages/assets/AssetsCatalogue";
+import { AssetDetail } from "@/pages/assets/AssetDetail";
 import { AssetLocations } from "@/pages/master/locations/AssetLocations";
-import { AssetForm } from "@/pages/assets/AssetForm";
 import { useCurrentPage } from "@/hooks/useCurrentPage";
 import { Pages } from "@/types/ui";
 import "@/App.css";
@@ -36,10 +36,11 @@ const App: React.FC<AppProps> = () => {
         return <Dashboard toastRef={toastRef} />;
       case Pages.ASSETS:
         return <AssetsCatalogue toastRef={toastRef} />;
+      case Pages.ASSET_DETAIL_VIEW:
+      case Pages.ASSET_DETAIL_EDIT:
+        return <AssetDetail toastRef={toastRef} />;
       case Pages.ASSET_LOCATIONS:
         return <AssetLocations toastRef={toastRef} />;
-      case Pages.ASSET_FORM:
-        return <AssetForm toastRef={toastRef} />;
       case Pages.ADMIN:
         return <div>Admin page</div>;
     }

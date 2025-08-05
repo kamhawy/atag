@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { BreadCrumb } from "primereact/breadcrumb";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { Search, Bell, Menu, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/contexts/ThemeContext";
+import { Search, Bell, Menu } from "lucide-react";
+import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import "@/components/layout/Header.css";
 
 interface HeaderProps {
@@ -12,7 +12,6 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
   const [globalSearch, setGlobalSearch] = useState("");
-  const { theme, toggleTheme } = useTheme();
   // Use safe check for window
   const location =
     typeof window !== "undefined" ? window.location.pathname : "";
@@ -98,21 +97,7 @@ export const Header: React.FC<HeaderProps> = ({ onDrawerToggle }) => {
             <Bell size={20} />
           </Button>
 
-          <Button
-            className="p-button-outlined p-button-rounded theme-toggle-btn"
-            onClick={toggleTheme}
-            tooltip={
-              theme === "lara-light-blue"
-                ? "Switch to Dark Mode"
-                : "Switch to Light Mode"
-            }
-          >
-            {theme === "lara-light-blue" ? (
-              <Moon size={20} />
-            ) : (
-              <Sun size={20} />
-            )}
-          </Button>
+          <ThemeSwitcher />
         </div>
       </div>
     </header>

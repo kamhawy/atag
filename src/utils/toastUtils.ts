@@ -1,7 +1,7 @@
-import { RefObject } from 'react';
-import { Toast } from 'primereact/toast';
+import { RefObject } from "react";
+import { Toast } from "primereact/toast";
 
-export type ToastSeverity = 'success' | 'info' | 'warn' | 'error';
+export type ToastSeverity = "success" | "info" | "warn" | "error";
 
 export interface ToastMessage {
   severity: ToastSeverity;
@@ -26,32 +26,34 @@ export interface ToastUtils {
   showCustom: (message: ToastMessage) => void;
 }
 
-export const createToastUtils = (toastRef: RefObject<Toast | null>): ToastUtils => {
+export const createToastUtils = (
+  toastRef: RefObject<Toast | null>
+): ToastUtils => {
   const showToast = (message: ToastMessage) => {
     toastRef.current?.show(message);
   };
 
   return {
     showSuccess: (summary: string, detail?: string, life: number = 3000) => {
-      showToast({ severity: 'success', summary, detail, life });
+      showToast({ severity: "success", summary, detail, life });
     },
 
     showError: (summary: string, detail?: string, life: number = 5000) => {
-      showToast({ severity: 'error', summary, detail, life });
+      showToast({ severity: "error", summary, detail, life });
     },
 
     showInfo: (summary: string, detail?: string, life: number = 3000) => {
-      showToast({ severity: 'info', summary, detail, life });
+      showToast({ severity: "info", summary, detail, life });
     },
 
     showWarning: (summary: string, detail?: string, life: number = 4000) => {
-      showToast({ severity: 'warn', summary, detail, life });
+      showToast({ severity: "warn", summary, detail, life });
     },
 
     showDeleted: (entity: string, detail?: string) => {
       showToast({
-        severity: 'success',
-        summary: 'Deleted',
+        severity: "success",
+        summary: "Deleted",
         detail: detail || `${entity} deleted successfully`,
         life: 3000
       });
@@ -59,8 +61,8 @@ export const createToastUtils = (toastRef: RefObject<Toast | null>): ToastUtils 
 
     showUpdated: (entity: string, detail?: string) => {
       showToast({
-        severity: 'success',
-        summary: 'Updated',
+        severity: "success",
+        summary: "Updated",
         detail: detail || `${entity} updated successfully`,
         life: 3000
       });
@@ -68,8 +70,8 @@ export const createToastUtils = (toastRef: RefObject<Toast | null>): ToastUtils 
 
     showCreated: (entity: string, detail?: string) => {
       showToast({
-        severity: 'success',
-        summary: 'Created',
+        severity: "success",
+        summary: "Created",
         detail: detail || `${entity} created successfully`,
         life: 3000
       });
@@ -77,8 +79,8 @@ export const createToastUtils = (toastRef: RefObject<Toast | null>): ToastUtils 
 
     showSaved: (entity: string, detail?: string) => {
       showToast({
-        severity: 'success',
-        summary: 'Saved',
+        severity: "success",
+        summary: "Saved",
         detail: detail || `${entity} saved successfully`,
         life: 3000
       });
@@ -86,7 +88,7 @@ export const createToastUtils = (toastRef: RefObject<Toast | null>): ToastUtils 
 
     showActionSuccess: (action: string, entity: string, detail?: string) => {
       showToast({
-        severity: 'success',
+        severity: "success",
         summary: action,
         detail: detail || `${action} ${entity} successfully`,
         life: 3000
@@ -95,7 +97,7 @@ export const createToastUtils = (toastRef: RefObject<Toast | null>): ToastUtils 
 
     showActionError: (action: string, entity: string, detail?: string) => {
       showToast({
-        severity: 'error',
+        severity: "error",
         summary: `${action} Failed`,
         detail: detail || `Failed to ${action.toLowerCase()} ${entity}`,
         life: 5000
@@ -104,8 +106,8 @@ export const createToastUtils = (toastRef: RefObject<Toast | null>): ToastUtils 
 
     showValidationError: (message: string) => {
       showToast({
-        severity: 'error',
-        summary: 'Validation Error',
+        severity: "error",
+        summary: "Validation Error",
         detail: message,
         life: 5000
       });
@@ -113,9 +115,9 @@ export const createToastUtils = (toastRef: RefObject<Toast | null>): ToastUtils 
 
     showNetworkError: (detail?: string) => {
       showToast({
-        severity: 'error',
-        summary: 'Network Error',
-        detail: detail || 'Unable to connect to the server. Please try again.',
+        severity: "error",
+        summary: "Network Error",
+        detail: detail || "Unable to connect to the server. Please try again.",
         life: 5000
       });
     },
@@ -124,4 +126,4 @@ export const createToastUtils = (toastRef: RefObject<Toast | null>): ToastUtils 
       showToast(message);
     }
   };
-}; 
+};
