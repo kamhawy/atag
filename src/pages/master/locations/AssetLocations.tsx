@@ -6,6 +6,7 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Tag } from "primereact/tag";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Dialog } from "primereact/dialog";
 import { Toast } from "primereact/toast";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import "./AssetLocations.css";
@@ -13,7 +14,7 @@ import { Location } from "@/types/models";
 import { RefObject } from "react";
 import { useToast } from "@/hooks/useToast";
 import { sampleLocations } from "@/data/sampleData";
-import "./AssetLocations.css";
+import { AssetLocationFormDialog } from "./AssetLocationFormDialog";
 
 interface AssetLocationsProps {
   toastRef?: RefObject<Toast | null>;
@@ -25,6 +26,7 @@ export const AssetLocations: React.FC<AssetLocationsProps> = ({ toastRef }) => {
 
   // Use centralized sample data
   const [locations, setLocations] = useState<Location[]>(sampleLocations);
+  const [showAddDialog, setShowAddDialog] = useState(false);
 
   const getStatusSeverity = (status: string) => {
     switch (status) {
@@ -112,7 +114,25 @@ export const AssetLocations: React.FC<AssetLocationsProps> = ({ toastRef }) => {
   };
 
   const openNew = () => {
-    navigate({ to: "/master/locations/new" });
+    setShowAddDialog(true);
+  };
+
+  const handleCancelAdd = () => {
+    setShowAddDialog(false);
+  };
+
+  const handleSaveLocation = (location: Location) => {
+    // Generate a new ID for the location
+    const newLocation = {
+      ...location,
+      id: `location_${Date.now()}`,
+      assetCount: 0,
+      lastUpdated: new Date().toISOString()
+    };
+    
+    setLocations([...locations, newLocation]);
+    setShowAddDialog(false);
+    toast.showSuccess("Location created successfully");
   };
 
   return (
@@ -211,6 +231,23 @@ export const AssetLocations: React.FC<AssetLocationsProps> = ({ toastRef }) => {
       </Card>
 
       <ConfirmDialog />
+
+      <Dialog
+        visible={showAddDialog}
+        onHide={handleCancelAdd}
+        header="Add New Location"
+        className="asset-dialog"
+        style={{ width: "80vw", maxWidth: "1200px", maxHeight: "90vh" }}
+        modal
+        maximizable
+        contentStyle={{ maxHeight: "calc(90vh - 120px)", overflow: "auto" }}
+      >
+        <AssetLocationFormDialog
+          onSave={handleSaveLocation}
+          onCancel={handleCancelAdd}
+          toastRef={toastRef}
+        />
+      </Dialog>
     </div>
   );
 };

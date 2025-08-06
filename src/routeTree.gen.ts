@@ -20,15 +20,10 @@ import { Route as MasterCategoriesIndexRouteImport } from './routes/master/categ
 import { Route as MasterBrandsIndexRouteImport } from './routes/master/brands/index'
 import { Route as AdminUsersIndexRouteImport } from './routes/admin/users/index'
 import { Route as AdminSettingsIndexRouteImport } from './routes/admin/settings/index'
-import { Route as MasterModelsNewRouteImport } from './routes/master/models/new'
 import { Route as MasterModelsModelIdRouteImport } from './routes/master/models/$modelId'
-import { Route as MasterLocationsNewRouteImport } from './routes/master/locations/new'
 import { Route as MasterLocationsLocationIdRouteImport } from './routes/master/locations/$locationId'
-import { Route as MasterCategoriesNewRouteImport } from './routes/master/categories/new'
 import { Route as MasterCategoriesCategoryIdRouteImport } from './routes/master/categories/$categoryId'
-import { Route as MasterBrandsNewRouteImport } from './routes/master/brands/new'
 import { Route as MasterBrandsBrandIdRouteImport } from './routes/master/brands/$brandId'
-import { Route as AdminUsersNewRouteImport } from './routes/admin/users/new'
 import { Route as AdminUsersUserIdRouteImport } from './routes/admin/users/$userId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -86,19 +81,9 @@ const AdminSettingsIndexRoute = AdminSettingsIndexRouteImport.update({
   path: '/admin/settings/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MasterModelsNewRoute = MasterModelsNewRouteImport.update({
-  id: '/master/models/new',
-  path: '/master/models/new',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MasterModelsModelIdRoute = MasterModelsModelIdRouteImport.update({
   id: '/master/models/$modelId',
   path: '/master/models/$modelId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MasterLocationsNewRoute = MasterLocationsNewRouteImport.update({
-  id: '/master/locations/new',
-  path: '/master/locations/new',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MasterLocationsLocationIdRoute =
@@ -107,30 +92,15 @@ const MasterLocationsLocationIdRoute =
     path: '/master/locations/$locationId',
     getParentRoute: () => rootRouteImport,
   } as any)
-const MasterCategoriesNewRoute = MasterCategoriesNewRouteImport.update({
-  id: '/master/categories/new',
-  path: '/master/categories/new',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MasterCategoriesCategoryIdRoute =
   MasterCategoriesCategoryIdRouteImport.update({
     id: '/master/categories/$categoryId',
     path: '/master/categories/$categoryId',
     getParentRoute: () => rootRouteImport,
   } as any)
-const MasterBrandsNewRoute = MasterBrandsNewRouteImport.update({
-  id: '/master/brands/new',
-  path: '/master/brands/new',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MasterBrandsBrandIdRoute = MasterBrandsBrandIdRouteImport.update({
   id: '/master/brands/$brandId',
   path: '/master/brands/$brandId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminUsersNewRoute = AdminUsersNewRouteImport.update({
-  id: '/admin/users/new',
-  path: '/admin/users/new',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminUsersUserIdRoute = AdminUsersUserIdRouteImport.update({
@@ -146,15 +116,10 @@ export interface FileRoutesByFullPath {
   '/assets': typeof AssetsIndexRoute
   '/master': typeof MasterIndexRoute
   '/admin/users/$userId': typeof AdminUsersUserIdRoute
-  '/admin/users/new': typeof AdminUsersNewRoute
   '/master/brands/$brandId': typeof MasterBrandsBrandIdRoute
-  '/master/brands/new': typeof MasterBrandsNewRoute
   '/master/categories/$categoryId': typeof MasterCategoriesCategoryIdRoute
-  '/master/categories/new': typeof MasterCategoriesNewRoute
   '/master/locations/$locationId': typeof MasterLocationsLocationIdRoute
-  '/master/locations/new': typeof MasterLocationsNewRoute
   '/master/models/$modelId': typeof MasterModelsModelIdRoute
-  '/master/models/new': typeof MasterModelsNewRoute
   '/admin/settings': typeof AdminSettingsIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
   '/master/brands': typeof MasterBrandsIndexRoute
@@ -169,15 +134,10 @@ export interface FileRoutesByTo {
   '/assets': typeof AssetsIndexRoute
   '/master': typeof MasterIndexRoute
   '/admin/users/$userId': typeof AdminUsersUserIdRoute
-  '/admin/users/new': typeof AdminUsersNewRoute
   '/master/brands/$brandId': typeof MasterBrandsBrandIdRoute
-  '/master/brands/new': typeof MasterBrandsNewRoute
   '/master/categories/$categoryId': typeof MasterCategoriesCategoryIdRoute
-  '/master/categories/new': typeof MasterCategoriesNewRoute
   '/master/locations/$locationId': typeof MasterLocationsLocationIdRoute
-  '/master/locations/new': typeof MasterLocationsNewRoute
   '/master/models/$modelId': typeof MasterModelsModelIdRoute
-  '/master/models/new': typeof MasterModelsNewRoute
   '/admin/settings': typeof AdminSettingsIndexRoute
   '/admin/users': typeof AdminUsersIndexRoute
   '/master/brands': typeof MasterBrandsIndexRoute
@@ -193,15 +153,10 @@ export interface FileRoutesById {
   '/assets/': typeof AssetsIndexRoute
   '/master/': typeof MasterIndexRoute
   '/admin/users/$userId': typeof AdminUsersUserIdRoute
-  '/admin/users/new': typeof AdminUsersNewRoute
   '/master/brands/$brandId': typeof MasterBrandsBrandIdRoute
-  '/master/brands/new': typeof MasterBrandsNewRoute
   '/master/categories/$categoryId': typeof MasterCategoriesCategoryIdRoute
-  '/master/categories/new': typeof MasterCategoriesNewRoute
   '/master/locations/$locationId': typeof MasterLocationsLocationIdRoute
-  '/master/locations/new': typeof MasterLocationsNewRoute
   '/master/models/$modelId': typeof MasterModelsModelIdRoute
-  '/master/models/new': typeof MasterModelsNewRoute
   '/admin/settings/': typeof AdminSettingsIndexRoute
   '/admin/users/': typeof AdminUsersIndexRoute
   '/master/brands/': typeof MasterBrandsIndexRoute
@@ -218,15 +173,10 @@ export interface FileRouteTypes {
     | '/assets'
     | '/master'
     | '/admin/users/$userId'
-    | '/admin/users/new'
     | '/master/brands/$brandId'
-    | '/master/brands/new'
     | '/master/categories/$categoryId'
-    | '/master/categories/new'
     | '/master/locations/$locationId'
-    | '/master/locations/new'
     | '/master/models/$modelId'
-    | '/master/models/new'
     | '/admin/settings'
     | '/admin/users'
     | '/master/brands'
@@ -241,15 +191,10 @@ export interface FileRouteTypes {
     | '/assets'
     | '/master'
     | '/admin/users/$userId'
-    | '/admin/users/new'
     | '/master/brands/$brandId'
-    | '/master/brands/new'
     | '/master/categories/$categoryId'
-    | '/master/categories/new'
     | '/master/locations/$locationId'
-    | '/master/locations/new'
     | '/master/models/$modelId'
-    | '/master/models/new'
     | '/admin/settings'
     | '/admin/users'
     | '/master/brands'
@@ -264,15 +209,10 @@ export interface FileRouteTypes {
     | '/assets/'
     | '/master/'
     | '/admin/users/$userId'
-    | '/admin/users/new'
     | '/master/brands/$brandId'
-    | '/master/brands/new'
     | '/master/categories/$categoryId'
-    | '/master/categories/new'
     | '/master/locations/$locationId'
-    | '/master/locations/new'
     | '/master/models/$modelId'
-    | '/master/models/new'
     | '/admin/settings/'
     | '/admin/users/'
     | '/master/brands/'
@@ -288,15 +228,10 @@ export interface RootRouteChildren {
   AssetsIndexRoute: typeof AssetsIndexRoute
   MasterIndexRoute: typeof MasterIndexRoute
   AdminUsersUserIdRoute: typeof AdminUsersUserIdRoute
-  AdminUsersNewRoute: typeof AdminUsersNewRoute
   MasterBrandsBrandIdRoute: typeof MasterBrandsBrandIdRoute
-  MasterBrandsNewRoute: typeof MasterBrandsNewRoute
   MasterCategoriesCategoryIdRoute: typeof MasterCategoriesCategoryIdRoute
-  MasterCategoriesNewRoute: typeof MasterCategoriesNewRoute
   MasterLocationsLocationIdRoute: typeof MasterLocationsLocationIdRoute
-  MasterLocationsNewRoute: typeof MasterLocationsNewRoute
   MasterModelsModelIdRoute: typeof MasterModelsModelIdRoute
-  MasterModelsNewRoute: typeof MasterModelsNewRoute
   AdminSettingsIndexRoute: typeof AdminSettingsIndexRoute
   AdminUsersIndexRoute: typeof AdminUsersIndexRoute
   MasterBrandsIndexRoute: typeof MasterBrandsIndexRoute
@@ -384,25 +319,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSettingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/master/models/new': {
-      id: '/master/models/new'
-      path: '/master/models/new'
-      fullPath: '/master/models/new'
-      preLoaderRoute: typeof MasterModelsNewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/master/models/$modelId': {
       id: '/master/models/$modelId'
       path: '/master/models/$modelId'
       fullPath: '/master/models/$modelId'
       preLoaderRoute: typeof MasterModelsModelIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/master/locations/new': {
-      id: '/master/locations/new'
-      path: '/master/locations/new'
-      fullPath: '/master/locations/new'
-      preLoaderRoute: typeof MasterLocationsNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/master/locations/$locationId': {
@@ -412,13 +333,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterLocationsLocationIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/master/categories/new': {
-      id: '/master/categories/new'
-      path: '/master/categories/new'
-      fullPath: '/master/categories/new'
-      preLoaderRoute: typeof MasterCategoriesNewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/master/categories/$categoryId': {
       id: '/master/categories/$categoryId'
       path: '/master/categories/$categoryId'
@@ -426,25 +340,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterCategoriesCategoryIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/master/brands/new': {
-      id: '/master/brands/new'
-      path: '/master/brands/new'
-      fullPath: '/master/brands/new'
-      preLoaderRoute: typeof MasterBrandsNewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/master/brands/$brandId': {
       id: '/master/brands/$brandId'
       path: '/master/brands/$brandId'
       fullPath: '/master/brands/$brandId'
       preLoaderRoute: typeof MasterBrandsBrandIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/users/new': {
-      id: '/admin/users/new'
-      path: '/admin/users/new'
-      fullPath: '/admin/users/new'
-      preLoaderRoute: typeof AdminUsersNewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/users/$userId': {
@@ -464,15 +364,10 @@ const rootRouteChildren: RootRouteChildren = {
   AssetsIndexRoute: AssetsIndexRoute,
   MasterIndexRoute: MasterIndexRoute,
   AdminUsersUserIdRoute: AdminUsersUserIdRoute,
-  AdminUsersNewRoute: AdminUsersNewRoute,
   MasterBrandsBrandIdRoute: MasterBrandsBrandIdRoute,
-  MasterBrandsNewRoute: MasterBrandsNewRoute,
   MasterCategoriesCategoryIdRoute: MasterCategoriesCategoryIdRoute,
-  MasterCategoriesNewRoute: MasterCategoriesNewRoute,
   MasterLocationsLocationIdRoute: MasterLocationsLocationIdRoute,
-  MasterLocationsNewRoute: MasterLocationsNewRoute,
   MasterModelsModelIdRoute: MasterModelsModelIdRoute,
-  MasterModelsNewRoute: MasterModelsNewRoute,
   AdminSettingsIndexRoute: AdminSettingsIndexRoute,
   AdminUsersIndexRoute: AdminUsersIndexRoute,
   MasterBrandsIndexRoute: MasterBrandsIndexRoute,

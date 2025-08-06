@@ -276,6 +276,8 @@ export const AssetDetail: React.FC<AssetDetailProps> = ({
                     <small className="p-error">{errors.name}</small>
                   )}
                 </div>
+              </div>
+              <div className="form-row">
                 <div className="form-field">
                   <label htmlFor="assetTag">Asset Tag *</label>
                   <InputText
@@ -306,6 +308,8 @@ export const AssetDetail: React.FC<AssetDetailProps> = ({
                     <small className="p-error">{errors.category}</small>
                   )}
                 </div>
+              </div>
+              <div className="form-row">
                 <div className="form-field">
                   <label htmlFor="location">Location *</label>
                   <Dropdown
@@ -333,6 +337,8 @@ export const AssetDetail: React.FC<AssetDetailProps> = ({
                     placeholder="Select Status"
                   />
                 </div>
+              </div>
+              <div className="form-row">
                 <div className="form-field">
                   <label htmlFor="condition">Condition</label>
                   <Dropdown
@@ -345,6 +351,8 @@ export const AssetDetail: React.FC<AssetDetailProps> = ({
                     placeholder="Select Condition"
                   />
                 </div>
+              </div>
+              <div className="form-row">
                 <div className="form-field">
                   <label htmlFor="description">Description</label>
                   <InputTextarea

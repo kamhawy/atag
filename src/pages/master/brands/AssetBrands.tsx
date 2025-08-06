@@ -6,6 +6,7 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Tag } from "primereact/tag";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Dialog } from "primereact/dialog";
 import { Toast } from "primereact/toast";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { RefObject } from "react";
@@ -13,6 +14,7 @@ import { useToast } from "@/hooks/useToast";
 import { sampleBrands } from "@/data/sampleData";
 import { Brand } from "@/types/models";
 import "./AssetBrands.css";
+import { AssetBrandFormDialog } from "./AssetBrandFormDialog";
 
 interface AssetBrandsProps {
   toastRef?: RefObject<Toast | null>;
@@ -24,6 +26,7 @@ export const AssetBrands: React.FC<AssetBrandsProps> = ({ toastRef }) => {
 
   // Use centralized sample data
   const [brands, setBrands] = useState(sampleBrands);
+  const [showAddDialog, setShowAddDialog] = useState(false);
 
   const getStatusSeverity = (status: string) => {
     return status === "active" ? "success" : "danger";
@@ -77,7 +80,23 @@ export const AssetBrands: React.FC<AssetBrandsProps> = ({ toastRef }) => {
   };
 
   const openNew = () => {
-    navigate({ to: "/master/brands/new" });
+    setShowAddDialog(true);
+  };
+
+  const handleCancelAdd = () => {
+    setShowAddDialog(false);
+  };
+
+  const handleSaveBrand = (brand: Brand) => {
+    // Generate a new ID for the brand
+    const newBrand = {
+      ...brand,
+      id: `brand_${Date.now()}`
+    };
+    
+    setBrands([...brands, newBrand]);
+    setShowAddDialog(false);
+    toast.showSuccess("Brand created successfully");
   };
 
   return (
@@ -160,6 +179,23 @@ export const AssetBrands: React.FC<AssetBrandsProps> = ({ toastRef }) => {
       </Card>
 
       <ConfirmDialog />
+
+      <Dialog
+        visible={showAddDialog}
+        onHide={handleCancelAdd}
+        header="Add New Brand"
+        className="asset-dialog"
+        style={{ width: "80vw", maxWidth: "1200px", maxHeight: "90vh" }}
+        modal
+        maximizable
+        contentStyle={{ maxHeight: "calc(90vh - 120px)", overflow: "auto" }}
+      >
+        <AssetBrandFormDialog
+          onSave={handleSaveBrand}
+          onCancel={handleCancelAdd}
+          toastRef={toastRef}
+        />
+      </Dialog>
     </div>
   );
 };

@@ -347,6 +347,130 @@ export const sampleAssetCategories: Category[] = [
     status: "active",
     assetCount: 12,
     lastUpdated: "2024-01-11"
+  },
+  // Subcategories for Office Furniture
+  {
+    id: "CAT006",
+    name: "Chairs",
+    code: "OF-CH",
+    description: "Office chairs and seating",
+    parentCategory: "CAT001",
+    color: "#3B82F6",
+    icon: "chair",
+    status: "active",
+    assetCount: 25,
+    lastUpdated: "2024-01-15"
+  },
+  {
+    id: "CAT007",
+    name: "Desks",
+    code: "OF-DS",
+    description: "Office desks and workstations",
+    parentCategory: "CAT001",
+    color: "#3B82F6",
+    icon: "desk",
+    status: "active",
+    assetCount: 15,
+    lastUpdated: "2024-01-15"
+  },
+  {
+    id: "CAT008",
+    name: "Storage",
+    code: "OF-ST",
+    description: "Filing cabinets and storage units",
+    parentCategory: "CAT001",
+    color: "#3B82F6",
+    icon: "package",
+    status: "active",
+    assetCount: 5,
+    lastUpdated: "2024-01-15"
+  },
+  // Subcategories for IT Equipment
+  {
+    id: "CAT009",
+    name: "Computers",
+    code: "IT-COM",
+    description: "Desktop and laptop computers",
+    parentCategory: "CAT002",
+    color: "#10B981",
+    icon: "computer",
+    status: "active",
+    assetCount: 18,
+    lastUpdated: "2024-01-14"
+  },
+  {
+    id: "CAT010",
+    name: "Peripherals",
+    code: "IT-PER",
+    description: "Printers, scanners, and other peripherals",
+    parentCategory: "CAT002",
+    color: "#10B981",
+    icon: "monitor",
+    status: "active",
+    assetCount: 8,
+    lastUpdated: "2024-01-14"
+  },
+  {
+    id: "CAT011",
+    name: "Networking",
+    code: "IT-NET",
+    description: "Network equipment and accessories",
+    parentCategory: "CAT002",
+    color: "#10B981",
+    icon: "settings",
+    status: "active",
+    assetCount: 6,
+    lastUpdated: "2024-01-14"
+  },
+  // Subcategories for Electronics
+  {
+    id: "CAT012",
+    name: "Displays",
+    code: "EL-DIS",
+    description: "Monitors, TVs, and display screens",
+    parentCategory: "CAT004",
+    color: "#EF4444",
+    icon: "monitor",
+    status: "active",
+    assetCount: 12,
+    lastUpdated: "2024-01-12"
+  },
+  {
+    id: "CAT013",
+    name: "Audio Equipment",
+    code: "EL-AUD",
+    description: "Speakers, microphones, and audio devices",
+    parentCategory: "CAT004",
+    color: "#EF4444",
+    icon: "settings",
+    status: "active",
+    assetCount: 7,
+    lastUpdated: "2024-01-12"
+  },
+  // Subcategories for Appliances
+  {
+    id: "CAT014",
+    name: "Kitchen Appliances",
+    code: "AP-KIT",
+    description: "Coffee makers, microwaves, and kitchen equipment",
+    parentCategory: "CAT005",
+    color: "#8B5CF6",
+    icon: "settings",
+    status: "active",
+    assetCount: 8,
+    lastUpdated: "2024-01-11"
+  },
+  {
+    id: "CAT015",
+    name: "Climate Control",
+    code: "AP-CLI",
+    description: "Air conditioners, heaters, and climate control",
+    parentCategory: "CAT005",
+    color: "#8B5CF6",
+    icon: "settings",
+    status: "active",
+    assetCount: 4,
+    lastUpdated: "2024-01-11"
   }
 ];
 

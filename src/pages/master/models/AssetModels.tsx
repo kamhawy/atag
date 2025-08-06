@@ -6,6 +6,7 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Tag } from "primereact/tag";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Dialog } from "primereact/dialog";
 import { Toast } from "primereact/toast";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { RefObject } from "react";
@@ -17,6 +18,7 @@ import {
 } from "@/data/sampleData";
 import "./AssetModels.css";
 import { Model } from "@/types/models";
+import { AssetModelFormDialog } from "./AssetModelFormDialog";
 
 interface AssetModelsProps {
   toastRef?: RefObject<Toast | null>;
@@ -28,6 +30,7 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
 
   // Use centralized sample data
   const [models, setModels] = useState(sampleModels);
+  const [showAddDialog, setShowAddDialog] = useState(false);
 
   const getStatusSeverity = (status: string) => {
     return status === "active" ? "success" : "danger";
@@ -93,7 +96,23 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
   };
 
   const openNew = () => {
-    navigate({ to: "/master/models/new" });
+    setShowAddDialog(true);
+  };
+
+  const handleCancelAdd = () => {
+    setShowAddDialog(false);
+  };
+
+  const handleSaveModel = (model: Model) => {
+    // Generate a new ID for the model
+    const newModel = {
+      ...model,
+      id: `model_${Date.now()}`
+    };
+    
+    setModels([...models, newModel]);
+    setShowAddDialog(false);
+    toast.showSuccess("Model created successfully");
   };
 
   return (
@@ -180,6 +199,23 @@ export const AssetModels: React.FC<AssetModelsProps> = ({ toastRef }) => {
       </Card>
 
       <ConfirmDialog />
+
+      <Dialog
+        visible={showAddDialog}
+        onHide={handleCancelAdd}
+        header="Add New Model"
+        className="asset-dialog"
+        style={{ width: "80vw", maxWidth: "1200px", maxHeight: "90vh" }}
+        modal
+        maximizable
+        contentStyle={{ maxHeight: "calc(90vh - 120px)", overflow: "auto" }}
+      >
+        <AssetModelFormDialog
+          onSave={handleSaveModel}
+          onCancel={handleCancelAdd}
+          toastRef={toastRef}
+        />
+      </Dialog>
     </div>
   );
 };

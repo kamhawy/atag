@@ -12,8 +12,9 @@ import { Toast } from "primereact/toast";
 import { RefObject } from "react";
 import { dropdownOptions, sampleAssets } from "@/data/sampleData";
 import { AssetCard } from "@/components/ui/AssetCard";
-import { AddAssetFormDialog } from "./AddAssetFormDialog";
+import { AddAssetDialog } from "./AddAssetDialog";
 import { useToast } from "@/hooks/useToast";
+import { useAddAsset } from "@/hooks/useAddAsset";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { useNavigate } from "@tanstack/react-router";
 import "./AssetsCatalogue.css";
@@ -40,8 +41,22 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = ({
   const [showFilters, setShowFilters] = useState(false);
 
   // Asset operation states
-  const [showAddDialog, setShowAddDialog] = useState(false);
   const [assets, setAssets] = useState<Asset[]>(sampleAssets);
+
+  // Use the AddAsset hook
+  const {
+    showAddAssetDialog,
+    selectedCategory,
+    openAddAssetDialog,
+    handleSaveAsset,
+    handleCancelAddAsset
+  } = useAddAsset({
+    toastRef,
+    onAssetCreated: (asset) => {
+      // Add the new asset to the list
+      setAssets([...assets, asset]);
+    }
+  });
 
   // Convert Asset to AssetSearch for display
   const assetSearchData: AssetSearchModel[] = useMemo(() => {
@@ -110,7 +125,7 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = ({
 
   // Asset operation handlers
   const handleAddAsset = () => {
-    setShowAddDialog(true);
+    openAddAssetDialog();
   };
 
   const handleViewAsset = (asset: AssetSearchModel) => {
@@ -139,16 +154,6 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = ({
         toast.showDeleted("Asset");
       }
     });
-  };
-
-  const handleSaveAsset = (savedAsset: Asset) => {
-    setAssets((prevAssets) => [...prevAssets, savedAsset]);
-    toast.showCreated("Asset");
-    setShowAddDialog(false);
-  };
-
-  const handleCancelAdd = () => {
-    setShowAddDialog(false);
   };
 
   const clearFilters = () => {
@@ -411,18 +416,19 @@ export const AssetsCatalogue: React.FC<AssetsCatalogueProps> = ({
 
       {/* Add Asset Dialog */}
       <Dialog
-        visible={showAddDialog}
-        onHide={handleCancelAdd}
-        header="Add New Asset"
+        visible={showAddAssetDialog}
+        onHide={handleCancelAddAsset}
+        header={`Add New Asset${selectedCategory ? ` - ${selectedCategory}` : ""}`}
         className="asset-dialog"
         style={{ width: "80vw", maxWidth: "1200px", maxHeight: "90vh" }}
         modal
         maximizable
         contentStyle={{ maxHeight: "calc(90vh - 120px)", overflow: "auto" }}
       >
-        <AddAssetFormDialog
+        <AddAssetDialog
           onSave={handleSaveAsset}
-          onCancel={handleCancelAdd}
+          onCancel={handleCancelAddAsset}
+          preSelectedCategory={selectedCategory || ""}
         />
       </Dialog>
 

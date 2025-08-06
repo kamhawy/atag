@@ -84,4 +84,24 @@
   .form-grid {
     grid-template-columns: 1fr;
   }
-} 
+}
+
+/* Dialog-specific styles */
+.asset-category-form-dialog {
+  padding: 1rem;
+  max-height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.asset-category-form-dialog:focus {
+  outline: none;
+}
+
+.asset-category-form-dialog .asset-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 0;
+}

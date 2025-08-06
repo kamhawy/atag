@@ -6,6 +6,7 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Tag } from "primereact/tag";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Dialog } from "primereact/dialog";
 import { Toast } from "primereact/toast";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { RefObject } from "react";
@@ -13,6 +14,23 @@ import { useToast } from "@/hooks/useToast";
 import { sampleUsers } from "@/data/sampleData";
 import { User } from "@/types/models";
 import "./Users.css";
+import { UserFormDialog } from "./UserFormDialog";
+
+// Import the UserFormData interface
+interface UserFormData {
+  id: string;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  role: "admin" | "manager" | "user" | "viewer";
+  status: "active" | "inactive" | "pending";
+  department: string;
+  permissions: string[];
+  lastLogin: string;
+  isActive: boolean;
+}
 
 interface UsersProps {
   toastRef?: RefObject<Toast | null>;
@@ -24,6 +42,7 @@ export const Users: React.FC<UsersProps> = ({ toastRef }) => {
 
   // Use centralized sample data
   const [users, setUsers] = useState(sampleUsers);
+  const [showAddDialog, setShowAddDialog] = useState(false);
 
   const getStatusSeverity = (status: string) => {
     switch (status) {
@@ -111,7 +130,24 @@ export const Users: React.FC<UsersProps> = ({ toastRef }) => {
   };
 
   const openNew = () => {
-    navigate({ to: "/admin/users/new" });
+    setShowAddDialog(true);
+  };
+
+  const handleCancelAdd = () => {
+    setShowAddDialog(false);
+  };
+
+  const handleSaveUser = (user: UserFormData) => {
+    // Generate a new ID for the user
+    const newUser = {
+      ...user,
+      id: `user_${Date.now()}`,
+      lastLogin: new Date().toISOString()
+    };
+    
+    setUsers([...users, newUser]);
+    setShowAddDialog(false);
+    toast.showSuccess("User created successfully");
   };
 
   return (
@@ -223,6 +259,23 @@ export const Users: React.FC<UsersProps> = ({ toastRef }) => {
       </Card>
 
       <ConfirmDialog />
+
+      <Dialog
+        visible={showAddDialog}
+        onHide={handleCancelAdd}
+        header="Add New User"
+        className="asset-dialog"
+        style={{ width: "80vw", maxWidth: "1200px", maxHeight: "90vh" }}
+        modal
+        maximizable
+        contentStyle={{ maxHeight: "calc(90vh - 120px)", overflow: "auto" }}
+      >
+        <UserFormDialog
+          onSave={handleSaveUser}
+          onCancel={handleCancelAdd}
+          toastRef={toastRef}
+        />
+      </Dialog>
     </div>
   );
 };

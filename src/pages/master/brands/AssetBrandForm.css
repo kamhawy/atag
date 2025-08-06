@@ -156,3 +156,23 @@
   border-radius: 6px;
   margin: 0 0.125rem;
 }
+
+/* Dialog-specific styles */
+.asset-brand-form-dialog {
+  padding: 1rem;
+  max-height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.asset-brand-form-dialog:focus {
+  outline: none;
+}
+
+.asset-brand-form-dialog .asset-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 0;
+}

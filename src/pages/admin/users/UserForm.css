@@ -79,3 +79,23 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Dialog-specific styles */
+.user-form-dialog {
+  padding: 1rem;
+  max-height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.user-form-dialog:focus {
+  outline: none;
+}
+
+.user-form-dialog .user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 0;
+}

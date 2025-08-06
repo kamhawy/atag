@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
@@ -7,28 +7,26 @@ import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Asset } from "@/types/models";
 import { dropdownOptions } from "@/data/sampleData";
-import "./AssetForm.css";
+import "./AddAssetDialog.css";
 
-interface AssetFormDialogProps {
-  mode: "add" | "edit" | "view";
-  initialAsset?: Asset | null;
+interface AddAssetDialogProps {
   onSave: (asset: Asset) => void;
   onCancel: () => void;
-  isViewMode?: boolean;
+  preSelectedCategory?: string;
 }
 
-export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
-  mode,
-  initialAsset,
+export const AddAssetDialog: React.FC<AddAssetDialogProps> = ({
   onSave,
   onCancel,
-  isViewMode = false
+  preSelectedCategory
 }) => {
+  const formRef = useRef<HTMLDivElement>(null);
+  
   const [asset, setAsset] = useState<Asset>({
     id: "",
     name: "",
     assetTag: "",
-    category: "",
+    category: preSelectedCategory || "",
     location: "",
     status: "active",
     condition: "good",
@@ -48,25 +46,18 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Prevent auto-scrolling when dialog opens
+  useEffect(() => {
+    if (formRef.current) {
+      formRef.current.scrollTop = 0;
+    }
+  }, []);
+
   // Use centralized dropdown options
   const categories = dropdownOptions.categories;
   const locations = dropdownOptions.locations;
   const statuses = dropdownOptions.statuses;
   const conditions = dropdownOptions.conditions;
-
-  useEffect(() => {
-    if (initialAsset) {
-      setAsset({ ...initialAsset });
-    } else if (mode === "add") {
-      // Generate new ID for add mode
-      const newId = `AST${String(Math.floor(Math.random() * 1000)).padStart(3, "0")}`;
-      setAsset((prev) => ({
-        ...prev,
-        id: newId,
-        lastUpdated: new Date().toISOString().split("T")[0]
-      }));
-    }
-  }, [initialAsset, mode]);
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
@@ -101,16 +92,15 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
     if (validateForm()) {
       const assetToSave = {
         ...asset,
+        id: `AST${String(Math.floor(Math.random() * 1000)).padStart(3, "0")}`,
         lastUpdated: new Date().toISOString().split("T")[0]
       };
       onSave(assetToSave);
     }
   };
 
-  const isDisabled = isViewMode || mode === "view";
-
   return (
-    <div className="asset-form-dialog">
+    <div className="asset-form-dialog" ref={formRef}>
       <div className="asset-form">
         <div className="form-row">
           <div className="form-field">
@@ -120,7 +110,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
               value={asset.name}
               onChange={(e) => setAsset({ ...asset, name: e.target.value })}
               className={`w-full ${errors.name ? "p-invalid" : ""}`}
-              disabled={isDisabled}
             />
             {errors.name && <small className="p-error">{errors.name}</small>}
           </div>
@@ -131,7 +120,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
               value={asset.assetTag}
               onChange={(e) => setAsset({ ...asset, assetTag: e.target.value })}
               className={`w-full ${errors.assetTag ? "p-invalid" : ""}`}
-              disabled={isDisabled}
             />
             {errors.assetTag && (
               <small className="p-error">{errors.assetTag}</small>
@@ -148,8 +136,12 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
               options={categories}
               onChange={(e) => setAsset({ ...asset, category: e.value })}
               className={`w-full ${errors.category ? "p-invalid" : ""}`}
-              disabled={isDisabled}
               placeholder="Select Category"
+              showClear
+              filter
+              filterPlaceholder="Search categories..."
+              optionLabel="label"
+              optionValue="value"
             />
             {errors.category && (
               <small className="p-error">{errors.category}</small>
@@ -163,8 +155,12 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
               options={locations}
               onChange={(e) => setAsset({ ...asset, location: e.value })}
               className={`w-full ${errors.location ? "p-invalid" : ""}`}
-              disabled={isDisabled}
               placeholder="Select Location"
+              showClear
+              filter
+              filterPlaceholder="Search locations..."
+              optionLabel="label"
+              optionValue="value"
             />
             {errors.location && (
               <small className="p-error">{errors.location}</small>
@@ -181,8 +177,12 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
               options={statuses}
               onChange={(e) => setAsset({ ...asset, status: e.value })}
               className="w-full"
-              disabled={isDisabled}
               placeholder="Select Status"
+              showClear
+              filter
+              filterPlaceholder="Search statuses..."
+              optionLabel="label"
+              optionValue="value"
             />
           </div>
           <div className="form-field">
@@ -193,8 +193,12 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
               options={conditions}
               onChange={(e) => setAsset({ ...asset, condition: e.value })}
               className="w-full"
-              disabled={isDisabled}
               placeholder="Select Condition"
+              showClear
+              filter
+              filterPlaceholder="Search conditions..."
+              optionLabel="label"
+              optionValue="value"
             />
           </div>
         </div>
@@ -209,7 +213,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
                 setAsset({ ...asset, manufacturer: e.target.value })
               }
               className={`w-full ${errors.manufacturer ? "p-invalid" : ""}`}
-              disabled={isDisabled}
             />
             {errors.manufacturer && (
               <small className="p-error">{errors.manufacturer}</small>
@@ -222,7 +225,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
               value={asset.model}
               onChange={(e) => setAsset({ ...asset, model: e.target.value })}
               className={`w-full ${errors.model ? "p-invalid" : ""}`}
-              disabled={isDisabled}
             />
             {errors.model && <small className="p-error">{errors.model}</small>}
           </div>
@@ -238,7 +240,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
                 setAsset({ ...asset, serialNumber: e.target.value })
               }
               className="w-full"
-              disabled={isDisabled}
             />
           </div>
           <div className="form-field">
@@ -250,7 +251,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
                 setAsset({ ...asset, assignedTo: e.target.value })
               }
               className="w-full"
-              disabled={isDisabled}
             />
           </div>
         </div>
@@ -265,7 +265,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
                 setAsset({ ...asset, purchaseDate: e.value as Date })
               }
               className="w-full"
-              disabled={isDisabled}
               showIcon
             />
           </div>
@@ -278,7 +277,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
                 setAsset({ ...asset, purchasePrice: e.value || 0 })
               }
               className={`w-full ${errors.purchasePrice ? "p-invalid" : ""}`}
-              disabled={isDisabled}
               mode="currency"
               currency="USD"
               minFractionDigits={2}
@@ -298,7 +296,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
               value={asset.supplier}
               onChange={(e) => setAsset({ ...asset, supplier: e.target.value })}
               className="w-full"
-              disabled={isDisabled}
             />
           </div>
           <div className="form-field">
@@ -310,7 +307,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
                 setAsset({ ...asset, warrantyExpiry: e.value as Date })
               }
               className="w-full"
-              disabled={isDisabled}
               showIcon
             />
           </div>
@@ -326,7 +322,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
                 setAsset({ ...asset, lastMaintenance: e.value as Date })
               }
               className="w-full"
-              disabled={isDisabled}
               showIcon
             />
           </div>
@@ -339,7 +334,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
                 setAsset({ ...asset, nextMaintenance: e.value as Date })
               }
               className="w-full"
-              disabled={isDisabled}
               showIcon
             />
           </div>
@@ -355,7 +349,6 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
             }
             rows={3}
             className="w-full"
-            disabled={isDisabled}
           />
         </div>
 
@@ -366,15 +359,12 @@ export const AssetFormDialog: React.FC<AssetFormDialogProps> = ({
             onClick={onCancel}
             className="p-button-text"
           />
-          {!isViewMode && (
-            <Button
-              label={mode === "add" ? "Create Asset" : "Save Changes"}
-              icon="pi pi-check"
-              onClick={handleSave}
-              className="p-button-primary"
-              autoFocus
-            />
-          )}
+          <Button
+            label="Create Asset"
+            icon="pi pi-check"
+            onClick={handleSave}
+            className="p-button-primary"
+          />
         </div>
       </div>
     </div>

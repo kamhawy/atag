@@ -227,9 +227,7 @@ html,
 }
 
 /* Additional z-index fixes for other overlay elements */
-.p-dialog {
-  z-index: 1000 !important;
-}
+/* Removed fixed z-index for .p-dialog to allow PrimeReact to manage z-index for maximizable functionality */
 
 .p-overlaypanel {
   z-index: 1000 !important;
