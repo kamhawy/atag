@@ -266,6 +266,7 @@ export const AddAssetDialog: React.FC<AddAssetDialogProps> = ({
               }
               className="w-full"
               showIcon
+              appendTo={document.body}
             />
           </div>
           <div className="form-field">
@@ -308,6 +309,7 @@ export const AddAssetDialog: React.FC<AddAssetDialogProps> = ({
               }
               className="w-full"
               showIcon
+              appendTo={document.body}
             />
           </div>
         </div>
@@ -323,6 +325,7 @@ export const AddAssetDialog: React.FC<AddAssetDialogProps> = ({
               }
               className="w-full"
               showIcon
+              appendTo={document.body}
             />
           </div>
           <div className="form-field">
@@ -335,6 +338,7 @@ export const AddAssetDialog: React.FC<AddAssetDialogProps> = ({
               }
               className="w-full"
               showIcon
+              appendTo={document.body}
             />
           </div>
         </div>

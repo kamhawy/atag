@@ -3,6 +3,151 @@
   padding: 0;
 }
 
+/* Fix z-index issues for dropdowns and calendars in dialogs */
+.asset-form-dialog .p-dropdown-panel {
+  z-index: 10000 !important;
+}
+
+.asset-form-dialog .p-calendar-panel {
+  z-index: 10000 !important;
+}
+
+.asset-form-dialog .p-overlay-panel {
+  z-index: 10000 !important;
+}
+
+/* Specific fixes for calendar popups in dialogs */
+.asset-form-dialog .p-calendar .p-datepicker {
+  z-index: 10001 !important;
+}
+
+.asset-form-dialog .p-calendar .p-datepicker-panel {
+  z-index: 10001 !important;
+}
+
+/* Global calendar z-index fixes */
+.p-calendar .p-datepicker {
+  z-index: 10001 !important;
+}
+
+.p-calendar .p-datepicker-panel {
+  z-index: 10001 !important;
+}
+
+/* Ensure calendar overlay appears above dialog */
+.p-component-overlay + .p-datepicker {
+  z-index: 10001 !important;
+}
+
+/* Ensure dialog has proper z-index */
+.asset-dialog {
+  z-index: 9999 !important;
+}
+
+.asset-dialog .p-dialog {
+  z-index: 9999 !important;
+}
+
+/* Additional dropdown and calendar styling */
+.asset-form-dialog .p-dropdown {
+  width: 100%;
+}
+
+.asset-form-dialog .p-dropdown .p-dropdown-label {
+  width: 100%;
+}
+
+.asset-form-dialog .p-calendar {
+  width: 100%;
+}
+
+.asset-form-dialog .p-calendar .p-inputtext {
+  width: 100%;
+}
+
+/* Ensure proper positioning for overlay panels */
+.p-component-overlay {
+  z-index: 9998 !important;
+}
+
+/* Fix for PrimeReact overlay z-index issues */
+.p-overlay-panel {
+  z-index: 10000 !important;
+}
+
+.p-dropdown-panel {
+  z-index: 10000 !important;
+}
+
+.p-calendar-panel {
+  z-index: 10000 !important;
+}
+
+/* Comprehensive calendar z-index fixes */
+.p-datepicker,
+.p-datepicker-panel,
+.p-calendar .p-datepicker,
+.p-calendar .p-datepicker-panel {
+  z-index: 10001 !important;
+}
+
+/* Fix for calendar appendTo issues */
+.p-calendar .p-datepicker[style*="position: fixed"] {
+  z-index: 10001 !important;
+}
+
+/* Ensure calendar appears above all other elements */
+.p-datepicker:not([style*="display: none"]) {
+  z-index: 10001 !important;
+}
+
+/* Additional fix for appendTo body calendars */
+body > .p-datepicker {
+  z-index: 10001 !important;
+  position: fixed !important;
+}
+
+/* Ensure calendar panels are not affected by dialog overflow */
+.asset-dialog {
+  overflow: visible !important;
+}
+
+.asset-form-dialog {
+  overflow: visible !important;
+}
+
+/* Additional fixes for dropdown positioning */
+.p-dropdown-panel,
+.p-calendar-panel,
+.p-overlay-panel {
+  position: absolute !important;
+  z-index: 10000 !important;
+}
+
+/* Calendar specific positioning fixes */
+.p-datepicker,
+.p-datepicker-panel {
+  position: absolute !important;
+  z-index: 10001 !important;
+}
+
+/* Ensure calendar panels are not clipped by dialog */
+.asset-form-dialog .p-calendar {
+  position: relative;
+  z-index: 1;
+}
+
+.asset-form-dialog .p-calendar .p-datepicker {
+  position: fixed !important;
+  z-index: 10001 !important;
+}
+
+/* Ensure proper stacking context */
+.asset-form-dialog {
+  position: relative;
+  z-index: 1;
+}
+
 .asset-management-header {
   display: flex;
   justify-content: space-between;
